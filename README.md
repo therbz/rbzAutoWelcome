@@ -17,6 +17,6 @@ Automatically welcome/ welcome back joining players!
 # bStats Metrics
 [This plugin uses bStats metrics.](https://bstats.org/plugin/bukkit/rbzAutoWelcome/9814)
 
-# To Do
+# To-do
 * Add multi-word player messages
 * Add EssentialsX AFK hook
