@@ -4,7 +4,7 @@
 #                                       #
 #########################################
 
-# The amount of ticks before the plugin forces players to say their wb/welcome messag
+# The amount of ticks before the plugin forces players to say their wb/welcome message
 # Default: 20 ticks (1 second)
 message-delay: 20
 
