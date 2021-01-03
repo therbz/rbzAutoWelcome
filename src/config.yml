@@ -27,47 +27,47 @@ messages:
     - "&8&m--------------------------------"
 
   # Generic messages
-  incorrect-usage: "&c&lAUTOWB &8» &4Incorrect arguments! Command usage: &c%usage%"
+  incorrect-usage: "&c&lAUTOWB &8\u00BB &4Incorrect arguments! Command usage: &c%usage%"
   not-player: "&4[rbzAutoWelcome] You must be a player to execute this command!"
-  no-permission: "&c&lAUTOWB &8» &4You do not have permission &c%permission% &4to do this!"
-  unknown-player: "&c&lAUTOWB &8» &4Could not find player &c%target%&4!"
-  reload: "&6&lAUTOWB &8» &aSuccessfully reloaded &frbzAutoWelcome"
+  no-permission: "&c&lAUTOWB &8\u00BB &4You do not have permission &c%permission% &4to do this!"
+  unknown-player: "&c&lAUTOWB &8\u00BB &4Could not find player &c%target%&4!"
+  reload: "&6&lAUTOWB &8\u00BB &aSuccessfully reloaded &frbzAutoWelcome"
 
   wb:
     self:
       # Messages for setting or disabling your own auto-wb message
-      enable: "&6&lAUTOWB &8» &aYour auto-wb message has been set to &f%msg%"
-      disable: "&6&lAUTOWB &8» &cYour auto-wb message has been disabled."
+      enable: "&6&lAUTOWB &8\u00BB &aYour auto-wb message has been set to &f%msg%"
+      disable: "&6&lAUTOWB &8\u00BB &cYour auto-wb message has been disabled."
       # Messages for checking your own auto-wb message
       check:
-        success: "&6&lAUTOWB &8» &eYour auto-wb message is &f%msg%"
-        fail: "&c&lAUTOWB &8» &4You have not set an auto-wb message!"
+        success: "&6&lAUTOWB &8\u00BB &eYour auto-wb message is &f%msg%"
+        fail: "&c&lAUTOWB &8\u00BB &4You have not set an auto-wb message!"
     other-player:
       # Messages for setting or disabling another player's auto-wb message
-      enable: "&6&lAUTOWB &8» &aSet &f%target%&a's auto-wb message to &f%msg%"
-      disable: "&6&lAUTOWB &8» &cDisabled &f%target%&c's auto-wb message."
+      enable: "&6&lAUTOWB &8\u00BB &aSet &f%target%&a's auto-wb message to &f%msg%"
+      disable: "&6&lAUTOWB &8\u00BB &cDisabled &f%target%&c's auto-wb message."
       # Messages for checking another players' auto-wb message
       check:
-        success: "&6&lAUTOWB &8» &f%player%&e's &eauto-wb message is &f%msg%"
-        fail: "&c&lAUTOWB &8» &c%player% &4has not set an auto-wb message!"
+        success: "&6&lAUTOWB &8\u00BB &f%player%&e's &eauto-wb message is &f%msg%"
+        fail: "&c&lAUTOWB &8\u00BB &c%player% &4has not set an auto-wb message!"
 
   welcome:
     self:
       # Messages for setting or disabling your own auto-welcome message
-      enable: "&6&lAUTOWB &8» &aYour auto-welcome message has been set to &f%msg%"
-      disable: "&6&lAUTOWB &8» &cYour auto-welcome message has been disabled."
+      enable: "&6&lAUTOWB &8\u00BB &aYour auto-welcome message has been set to &f%msg%"
+      disable: "&6&lAUTOWB &8\u00BB &cYour auto-welcome message has been disabled."
       # Messages for checking your own auto-welcome message
       check:
-        success: "&6&lAUTOWB &8» &eYour auto-wb message is &f%msg%"
-        fail: "&c&lAUTOWB &8» &4You have not set an auto-wb message!"
+        success: "&6&lAUTOWB &8\u00BB &eYour auto-wb message is &f%msg%"
+        fail: "&c&lAUTOWB &8\u00BB &4You have not set an auto-wb message!"
     other-player:
       # Messages for setting or disabling another player's auto-welcome message
-      enable: "&6&lAUTOWB &8» &aSet &f%target%&a's auto-welcome message to &f%msg%"
-      disable: "&6&lAUTOWB &8» &cDisabled &f%target%&c's auto-welcome message."
+      enable: "&6&lAUTOWB &8\u00BB &aSet &f%target%&a's auto-welcome message to &f%msg%"
+      disable: "&6&lAUTOWB &8\u00BB &cDisabled &f%target%&c's auto-welcome message."
       # Messages for checking another player's auto-welcome message
       check:
-        success: "&6&lAUTOWB &8» &f%player%&e's &eauto-welcome message is &f%msg%"
-        fail: "&c&lAUTOWB &8» &c%player% &4has not set an auto-welcome message!"
+        success: "&6&lAUTOWB &8\u00BB &f%player%&e's &eauto-welcome message is &f%msg%"
+        fail: "&c&lAUTOWB &8\u00BB &c%player% &4has not set an auto-welcome message!"
 
 # DO NOT TOUCH
 config-version: 1
