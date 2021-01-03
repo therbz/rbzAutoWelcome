@@ -1,0 +1,10 @@
+name: rbzAutoWelcome
+version: 1.0
+author: therbz
+main: me.therbz.rbzautowelcome.Main
+api-version: 1.13
+commands:
+  autowb:
+    description: Main rbzAutoWelcome command
+    usage: /autowb
+    aliases: [awb]

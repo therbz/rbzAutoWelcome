@@ -1,0 +1,73 @@
+#########################################
+#                                       #
+#     rbzAutoWelcome v1.0 by therbz     #
+#                                       #
+#########################################
+
+# The amount of ticks before the plugin forces players to say their wb/welcome messag
+# Default: 20 ticks (1 second)
+message-delay: 20
+
+# Messages
+messages:
+  help:
+    - "&8&m--------------------------------"
+    - "&r         &6&lrbzAutoWelcome &8- &7Help"
+    - "&r"
+    - "&e/autowb"
+    - "&7Displays this help menu"
+    - "&e/autowb check &f<wb|welcome> [player]"
+    - "&7Check your (or another player's) auto wb or welcome message"
+    - "&e/autowb set &f<wb|welcome> <message|off>"
+    - "&7Sets your auto wb or welcome message"
+    - "&e/autowb setplayer &f<wb|welcome> <player> <message|off>"
+    - "&7Sets another player's auto wb or welcome message"
+    - "&e/autowb reload"
+    - "&7Reloads the plugin's config"
+    - "&8&m--------------------------------"
+
+  # Generic messages
+  incorrect-usage: "&c&lAUTOWB &8» &4Incorrect arguments! Command usage: &c%usage%"
+  not-player: "&4[rbzAutoWelcome] You must be a player to execute this command!"
+  no-permission: "&c&lAUTOWB &8» &4You do not have permission &c%permission% &4to do this!"
+  unknown-player: "&c&lAUTOWB &8» &4Could not find player &c%target%&4!"
+  reload: "&6&lAUTOWB &8» &aSuccessfully reloaded &frbzAutoWelcome"
+
+  wb:
+    self:
+      # Messages for setting or disabling your own auto-wb message
+      enable: "&6&lAUTOWB &8» &aYour auto-wb message has been set to &f%msg%"
+      disable: "&6&lAUTOWB &8» &cYour auto-wb message has been disabled."
+      # Messages for checking your own auto-wb message
+      check:
+        success: "&6&lAUTOWB &8» &eYour auto-wb message is &f%msg%"
+        fail: "&c&lAUTOWB &8» &4You have not set an auto-wb message!"
+    other-player:
+      # Messages for setting or disabling another player's auto-wb message
+      enable: "&6&lAUTOWB &8» &aSet &f%target%&a's auto-wb message to &f%msg%"
+      disable: "&6&lAUTOWB &8» &cDisabled &f%target%&c's auto-wb message."
+      # Messages for checking another players' auto-wb message
+      check:
+        success: "&6&lAUTOWB &8» &f%player%&e's &eauto-wb message is &f%msg%"
+        fail: "&c&lAUTOWB &8» &c%player% &4has not set an auto-wb message!"
+
+  welcome:
+    self:
+      # Messages for setting or disabling your own auto-welcome message
+      enable: "&6&lAUTOWB &8» &aYour auto-welcome message has been set to &f%msg%"
+      disable: "&6&lAUTOWB &8» &cYour auto-welcome message has been disabled."
+      # Messages for checking your own auto-welcome message
+      check:
+        success: "&6&lAUTOWB &8» &eYour auto-wb message is &f%msg%"
+        fail: "&c&lAUTOWB &8» &4You have not set an auto-wb message!"
+    other-player:
+      # Messages for setting or disabling another player's auto-welcome message
+      enable: "&6&lAUTOWB &8» &aSet &f%target%&a's auto-welcome message to &f%msg%"
+      disable: "&6&lAUTOWB &8» &cDisabled &f%target%&c's auto-welcome message."
+      # Messages for checking another player's auto-welcome message
+      check:
+        success: "&6&lAUTOWB &8» &f%player%&e's &eauto-welcome message is &f%msg%"
+        fail: "&c&lAUTOWB &8» &c%player% &4has not set an auto-welcome message!"
+
+# DO NOT TOUCH
+config-version: 1
