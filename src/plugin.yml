@@ -1,7 +1,7 @@
 name: rbzAutoWelcome
-version: 1.0
+version: 1.1
 author: therbz
-main: me.therbz.rbzautowelcome.Main
+main: me.therbz.rbzautowelcome.AutoWelcome
 api-version: 1.13
 commands:
   autowb:
