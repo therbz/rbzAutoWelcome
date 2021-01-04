@@ -151,7 +151,7 @@ public class AutoWelcomeCommand implements CommandExecutor {
                     if (args[1].equalsIgnoreCase("wb")) {
                         if (args[2].equalsIgnoreCase("off")) {
                             AutoWelcome.removePlayerWB(p.getUniqueId());
-                            AutoWelcome.messageSender(sender, "messages.wb.self.disable");
+                            AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.wb.self.disable"));
                             return true;
                         }
 
@@ -163,7 +163,7 @@ public class AutoWelcomeCommand implements CommandExecutor {
                     else if (args[1].equalsIgnoreCase("welcome")) {
                         if (args[2].equalsIgnoreCase("off")) {
                             AutoWelcome.removePlayerWelcome(p.getUniqueId());
-                            AutoWelcome.messageSender(sender, "messages.welcome.self.disable");
+                            AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.welcome.self.disable"));
                             return true;
                         }
 
@@ -200,7 +200,7 @@ public class AutoWelcomeCommand implements CommandExecutor {
                     if (args[1].equalsIgnoreCase("wb")) {
                         if (args[3].equalsIgnoreCase("off")) {
                             AutoWelcome.removePlayerWB(p.getUniqueId());
-                            AutoWelcome.messageSender(sender, "messages.wb.other-player.disable");
+                            AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.wb.other-player.disable"));
                             return true;
                         }
 
@@ -212,7 +212,7 @@ public class AutoWelcomeCommand implements CommandExecutor {
                     else if (args[1].equalsIgnoreCase("welcome")) {
                         if (args[3].equalsIgnoreCase("off")) {
                             AutoWelcome.removePlayerWB(p.getUniqueId());
-                            AutoWelcome.messageSender(sender, "messages.welcome.other-player.disable");
+                            AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.welcome.other-player.disable"));
                             return true;
                         }
 
