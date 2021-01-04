@@ -172,12 +172,9 @@ public class AutoWelcomeCommand implements CommandExecutor {
                         AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.welcome.self.enable").replace("%msg%", args[2]));
                         return true;
                     }
-                    // Sender didn't put wb or welcome
-                    AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.incorrect-usage").replace("%usage%", "/autowb set <wb|welcome> <message>"));
-                    return true;
                 }
                 // Sender didn't put 3 arguments
-                AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.incorrect-usage").replace("%usage%", "/autowb set <wb|welcome> <message>"));
+                AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.incorrect-usage").replace("%usage%", "/autowb set <wb|welcome> <message|off>"));
                 return true;
             }
             // /autowb setplayer <wb|welcome> <player> <message>
@@ -223,11 +220,9 @@ public class AutoWelcomeCommand implements CommandExecutor {
                         AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.welcome.self.enable").replace("%msg%", args[3]));
                         return true;
                     }
-                    AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.incorrect-usage").replace("%usage%", "/autowb set <wb|welcome> <message>"));
-                    return true;
                 }
                 // Not 4 arguments
-                AutoWelcome.messageSender(sender, plugin.getConfig().getString("incorrect-usage").replace("%usage%", "/autowb set <wb|welcome> [player]"));
+                AutoWelcome.messageSender(sender, plugin.getConfig().getString("incorrect-usage").replace("%usage%", "/autowb setplayer <wb|welcome> [player] <message|off>"));
                 return true;
             }
         }
