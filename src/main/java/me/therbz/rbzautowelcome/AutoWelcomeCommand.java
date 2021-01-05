@@ -220,7 +220,8 @@ public class AutoWelcomeCommand implements CommandExecutor {
 
                         //wbPlayers.put(p.getUniqueId(), args[3]);
                         AutoWelcome.setPlayerWB(p.getUniqueId(), message);
-                        AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.wb.self.enable").replace("%msg%", message));
+                        AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.wb.other-player.enable").replace("%msg%", message).replace("%target%", p.getName()));
+                        AutoWelcome.messageSender(p, plugin.getConfig().getString("messages.wb.self.enable").replace("%msg%", message));
                         return true;
                     }
                     else if (args[1].equalsIgnoreCase("welcome")) {
@@ -238,12 +239,13 @@ public class AutoWelcomeCommand implements CommandExecutor {
 
                         //welcomePlayers.put(p.getUniqueId(), args[3]);
                         AutoWelcome.setPlayerWelcome(p.getUniqueId(), message);
-                        AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.welcome.self.enable").replace("%msg%", message));
+                        AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.welcome.other-player.enable").replace("%msg%", message).replace("%target%", p.getName()));
+                        AutoWelcome.messageSender(p, plugin.getConfig().getString("messages.welcome.self.enable").replace("%msg%", message));
                         return true;
                     }
                 }
                 // Not 4 arguments
-                AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.incorrect-usage").replace("%usage%", "/autowb setplayer <wb|welcome> [player] <message|off>"));
+                AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.incorrect-usage").replace("%usage%", "/autowb setplayer <wb|welcome> <player> <message|off>"));
                 return true;
             }
         }
