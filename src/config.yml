@@ -58,8 +58,8 @@ messages:
       disable: "&6&lAUTOWB &8\u00BB &cYour auto-welcome message has been disabled."
       # Messages for checking your own auto-welcome message
       check:
-        success: "&6&lAUTOWB &8\u00BB &eYour auto-wb message is &f%msg%"
-        fail: "&c&lAUTOWB &8\u00BB &4You have not set an auto-wb message!"
+        success: "&6&lAUTOWB &8\u00BB &eYour auto-welcome message is &f%msg%"
+        fail: "&c&lAUTOWB &8\u00BB &4You have not set an auto-welcome message!"
     other-player:
       # Messages for setting or disabling another player's auto-welcome message
       enable: "&6&lAUTOWB &8\u00BB &aSet &f%target%&a's auto-welcome message to &f%msg%"
