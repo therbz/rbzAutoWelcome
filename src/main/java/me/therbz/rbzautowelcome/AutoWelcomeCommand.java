@@ -134,7 +134,7 @@ public class AutoWelcomeCommand implements CommandExecutor {
             // /autowb set <wb|welcome> <message>
             if (args[0].equalsIgnoreCase("set")) {
                 // Set for self
-                if (args.length==3) {
+                if (args.length>=3) {
                     // Check that the sender is a player
                     if (!(sender instanceof Player)) {
                         AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.not-player"));
@@ -155,9 +155,14 @@ public class AutoWelcomeCommand implements CommandExecutor {
                             return true;
                         }
 
+                        String message=args[2];
+                        for (int i = 3; i < args.length; i++) {
+                            message = message + " " + args[i];
+                        }
+
                         //wbPlayers.put(p.getUniqueId(), args[2]);
-                        AutoWelcome.setPlayerWB(p.getUniqueId(), args[2]);
-                        AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.wb.self.enable").replace("%msg%", args[2]));
+                        AutoWelcome.setPlayerWB(p.getUniqueId(), message);
+                        AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.wb.self.enable").replace("%msg%", message));
                         return true;
                     }
                     else if (args[1].equalsIgnoreCase("welcome")) {
@@ -167,20 +172,25 @@ public class AutoWelcomeCommand implements CommandExecutor {
                             return true;
                         }
 
+                        String message=args[2];
+                        for (int i = 3; i < args.length; i++) {
+                            message = message + " " + args[i];
+                        }
+
                         //welcomePlayers.put(p.getUniqueId(), args[2]);
-                        AutoWelcome.setPlayerWelcome(p.getUniqueId(), args[2]);
-                        AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.welcome.self.enable").replace("%msg%", args[2]));
+                        AutoWelcome.setPlayerWelcome(p.getUniqueId(), message);
+                        AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.welcome.self.enable").replace("%msg%", message));
                         return true;
                     }
                 }
-                // Sender didn't put 3 arguments
+                // Sender didn't put at least 3 arguments
                 AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.incorrect-usage").replace("%usage%", "/autowb set <wb|welcome> <message|off>"));
                 return true;
             }
             // /autowb setplayer <wb|welcome> <player> <message>
             if (args[0].equalsIgnoreCase("setplayer")) {
                 // Set for player
-                if (args.length==4) {
+                if (args.length>=4) {
                     // Check that sender has permission
                     if (!sender.hasPermission("rbzaw.set.others")) {
                         AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.no-permission").replace("%permission%", "rbzaw.set.others"));
@@ -202,9 +212,15 @@ public class AutoWelcomeCommand implements CommandExecutor {
                             return true;
                         }
 
+
+                        String message=args[3];
+                        for (int i = 4; i < args.length; i++) {
+                            message = message + " " + args[i];
+                        }
+
                         //wbPlayers.put(p.getUniqueId(), args[3]);
-                        AutoWelcome.setPlayerWB(p.getUniqueId(), args[3]);
-                        AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.wb.self.enable").replace("%msg%", args[3]));
+                        AutoWelcome.setPlayerWB(p.getUniqueId(), message);
+                        AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.wb.self.enable").replace("%msg%", message));
                         return true;
                     }
                     else if (args[1].equalsIgnoreCase("welcome")) {
@@ -215,14 +231,19 @@ public class AutoWelcomeCommand implements CommandExecutor {
                             return true;
                         }
 
+                        String message=args[3];
+                        for (int i = 4; i < args.length; i++) {
+                            message = message + " " + args[i];
+                        }
+
                         //welcomePlayers.put(p.getUniqueId(), args[3]);
-                        AutoWelcome.setPlayerWelcome(p.getUniqueId(), args[3]);
-                        AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.welcome.self.enable").replace("%msg%", args[3]));
+                        AutoWelcome.setPlayerWelcome(p.getUniqueId(), message);
+                        AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.welcome.self.enable").replace("%msg%", message));
                         return true;
                     }
                 }
                 // Not 4 arguments
-                AutoWelcome.messageSender(sender, plugin.getConfig().getString("incorrect-usage").replace("%usage%", "/autowb setplayer <wb|welcome> [player] <message|off>"));
+                AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.incorrect-usage").replace("%usage%", "/autowb setplayer <wb|welcome> [player] <message|off>"));
                 return true;
             }
         }
