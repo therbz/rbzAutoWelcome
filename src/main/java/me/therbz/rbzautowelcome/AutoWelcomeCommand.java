@@ -1,5 +1,6 @@
 package me.therbz.rbzautowelcome;
 
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -10,10 +11,10 @@ import java.util.List;
 import static org.bukkit.Bukkit.getPlayer;
 
 public class AutoWelcomeCommand implements CommandExecutor {
-    private JavaPlugin plugin = AutoWelcome.getPlugin(AutoWelcome.class);
+    private final JavaPlugin plugin = AutoWelcome.getPlugin(AutoWelcome.class);
 
     @Override
-    public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         // 0 args, send help menu
         if (args.length==0) {
             List<String> help = plugin.getConfig().getStringList("messages.help");
@@ -150,15 +151,16 @@ public class AutoWelcomeCommand implements CommandExecutor {
 
                     if (args[1].equalsIgnoreCase("wb")) {
                         if (args[2].equalsIgnoreCase("off")) {
-                            AutoWelcome.removePlayerWB(p.getUniqueId());
+                            AutoWelcome.setPlayerWB(p.getUniqueId(), "off");
                             AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.wb.self.disable"));
                             return true;
                         }
 
-                        String message=args[2];
+                        StringBuilder messageBuilder = new StringBuilder(args[2]);
                         for (int i = 3; i < args.length; i++) {
-                            message = message + " " + args[i];
+                            messageBuilder.append(" ").append(args[i]);
                         }
+                        String message = messageBuilder.toString();
 
                         //wbPlayers.put(p.getUniqueId(), args[2]);
                         AutoWelcome.setPlayerWB(p.getUniqueId(), message);
@@ -167,15 +169,16 @@ public class AutoWelcomeCommand implements CommandExecutor {
                     }
                     else if (args[1].equalsIgnoreCase("welcome")) {
                         if (args[2].equalsIgnoreCase("off")) {
-                            AutoWelcome.removePlayerWelcome(p.getUniqueId());
+                            AutoWelcome.setPlayerWelcome(p.getUniqueId(), "off");
                             AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.welcome.self.disable"));
                             return true;
                         }
 
-                        String message=args[2];
+                        StringBuilder messageBuilder = new StringBuilder(args[2]);
                         for (int i = 3; i < args.length; i++) {
-                            message = message + " " + args[i];
+                            messageBuilder.append(" ").append(args[i]);
                         }
+                        String message = messageBuilder.toString();
 
                         //welcomePlayers.put(p.getUniqueId(), args[2]);
                         AutoWelcome.setPlayerWelcome(p.getUniqueId(), message);
@@ -206,36 +209,38 @@ public class AutoWelcomeCommand implements CommandExecutor {
 
                     if (args[1].equalsIgnoreCase("wb")) {
                         if (args[3].equalsIgnoreCase("off")) {
-                            AutoWelcome.removePlayerWB(p.getUniqueId());
+                            AutoWelcome.setPlayerWB(p.getUniqueId(), "off");
                             AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.wb.other-player.disable").replace("%target%", p.getName()));
                             AutoWelcome.messageSender(p, plugin.getConfig().getString("messages.wb.self.disable"));
                             return true;
                         }
 
 
-                        String message=args[3];
+                        StringBuilder messageBuilder = new StringBuilder(args[3]);
                         for (int i = 4; i < args.length; i++) {
-                            message = message + " " + args[i];
+                            messageBuilder.append(" ").append(args[i]);
                         }
+                        String message = messageBuilder.toString();
 
                         //wbPlayers.put(p.getUniqueId(), args[3]);
-                        AutoWelcome.setPlayerWB(p.getUniqueId(), message);
+                        AutoWelcome.setPlayerWB(p.getUniqueId(), message.toString());
                         AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.wb.other-player.enable").replace("%msg%", message).replace("%target%", p.getName()));
                         AutoWelcome.messageSender(p, plugin.getConfig().getString("messages.wb.self.enable").replace("%msg%", message));
                         return true;
                     }
                     else if (args[1].equalsIgnoreCase("welcome")) {
                         if (args[3].equalsIgnoreCase("off")) {
-                            AutoWelcome.removePlayerWB(p.getUniqueId());
+                            AutoWelcome.setPlayerWelcome(p.getUniqueId(), "off");
                             AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.welcome.other-player.disable").replace("%target%", p.getName()));
                             AutoWelcome.messageSender(p, plugin.getConfig().getString("messages.welcome.self.disable"));
                             return true;
                         }
 
-                        String message=args[3];
+                        StringBuilder messageBuilder = new StringBuilder(args[3]);
                         for (int i = 4; i < args.length; i++) {
-                            message = message + " " + args[i];
+                            messageBuilder.append(" ").append(args[i]);
                         }
+                        String message = messageBuilder.toString();
 
                         //welcomePlayers.put(p.getUniqueId(), args[3]);
                         AutoWelcome.setPlayerWelcome(p.getUniqueId(), message);

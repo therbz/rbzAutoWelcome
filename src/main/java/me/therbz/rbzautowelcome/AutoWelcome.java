@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Objects;
 import java.util.UUID;
 import java.util.HashMap;
 
@@ -27,7 +28,7 @@ public class AutoWelcome extends JavaPlugin implements Listener {
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerLeaveListener(), this);
 
         // Register commands
-        getCommand("autowb").setExecutor(new AutoWelcomeCommand());
+        Objects.requireNonNull(getCommand("autowb")).setExecutor(new AutoWelcomeCommand());
 
         // Set up bStats metrics
         final int BSTATS_PLUGIN_ID = 9814;
@@ -61,7 +62,7 @@ public class AutoWelcome extends JavaPlugin implements Listener {
     public static void removePlayerWB(UUID uuid) {
         wbPlayers.remove(uuid);
     }
-    public static HashMap copyOfWBPlayers() {
+    public static HashMap<UUID, String> copyOfWBPlayers() {
         return wbPlayers;
     }
 
@@ -77,7 +78,7 @@ public class AutoWelcome extends JavaPlugin implements Listener {
     public static void removePlayerWelcome(UUID uuid) {
         welcomePlayers.remove(uuid);
     }
-    public static HashMap copyOfWelcomePlayers() {
+    public static HashMap<UUID, String> copyOfWelcomePlayers() {
         return welcomePlayers;
     }
 }
