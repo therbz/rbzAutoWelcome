@@ -40,8 +40,8 @@ public class PlayerLeaveListener implements Listener {
                     fileData.createSection("welcome");
                     fileData.set("welcome", AutoWelcome.getPlayerWelcome(playerUUID));
                 } else {
-                    fileData.createSection("wb");
-                    fileData.set("wb", null);
+                    fileData.createSection("welcome");
+                    fileData.set("welcome", null);
                 }
             }
             fileData.save(file);
