@@ -26,23 +26,20 @@ public class PlayerLeaveListener implements Listener {
         try {
             FileConfiguration fileData = YamlConfiguration.loadConfiguration(file);
             if (AutoWelcome.playerHasSetWB(playerUUID)) {
-                if (!AutoWelcome.getPlayerWB(playerUUID).equals("off")) {
-                    fileData.createSection("wb");
-                    fileData.set("wb", AutoWelcome.getPlayerWB(playerUUID));
-                }
-                else {
-                    fileData.createSection("wb");
-                    fileData.set("wb", null);
-                }
+                fileData.createSection("wb");
+                fileData.set("wb", AutoWelcome.getPlayerWB(playerUUID));
+            }
+            else {
+                fileData.createSection("wb");
+                fileData.set("wb", null);
             }
             if (AutoWelcome.playerHasSetWelcome(playerUUID)) {
-                if (!AutoWelcome.getPlayerWB(playerUUID).equals("off")) {
-                    fileData.createSection("welcome");
-                    fileData.set("welcome", AutoWelcome.getPlayerWelcome(playerUUID));
-                } else {
-                    fileData.createSection("welcome");
-                    fileData.set("welcome", null);
-                }
+                fileData.createSection("welcome");
+                fileData.set("welcome", AutoWelcome.getPlayerWelcome(playerUUID));
+            }
+            else {
+                fileData.createSection("welcome");
+                fileData.set("welcome", null);
             }
             fileData.save(file);
         } catch (IOException e) {

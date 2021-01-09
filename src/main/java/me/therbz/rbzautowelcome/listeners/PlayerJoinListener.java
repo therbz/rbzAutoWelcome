@@ -59,7 +59,8 @@ public class PlayerJoinListener implements Listener {
                         UUID sendingPlayerUuid = mapElement.getKey();
                         String msg = mapElement.getValue();
                         Player sendingPlayer = getPlayer(sendingPlayerUuid);
-                        if (joiningPlayer!=sendingPlayer && sendingPlayer.hasPermission("rbzaw.set") && !msg.equals("off")) { sendingPlayer.chat(msg); }
+                        // && !msg.equals("off")
+                        if (joiningPlayer!=sendingPlayer && sendingPlayer.hasPermission("rbzaw.set")) { sendingPlayer.chat(msg); }
                     });
                 } else {
                     // welcome
@@ -68,7 +69,7 @@ public class PlayerJoinListener implements Listener {
                         UUID sendingPlayerUuid = mapElement.getKey();
                         String msg = mapElement.getValue();
                         Player sendingPlayer = getPlayer(sendingPlayerUuid);
-                        if (joiningPlayer!=sendingPlayer && sendingPlayer.hasPermission("rbzaw.set") && !msg.equals("off")) { sendingPlayer.chat(msg); }
+                        if (joiningPlayer!=sendingPlayer && sendingPlayer.hasPermission("rbzaw.set")) { sendingPlayer.chat(msg); }
                     });
                 }
             }
