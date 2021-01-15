@@ -28,24 +28,28 @@ public class PlayerJoinListener implements Listener {
 
         // read from playerdata file
         file = new File(plugin.getDataFolder() + "/data/", joiningPlayer.getUniqueId().toString() + ".yml");
-        if (!file.exists()) {
+        /*if (!file.exists()) {
             try {
                 fileData = YamlConfiguration.loadConfiguration(file);
                 fileData.save(file);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-        fileData = YamlConfiguration.loadConfiguration(file);
-        if (fileData.contains("wb")) {
-            String wbMessage = fileData.getString("wb");
-            AutoWelcome.setPlayerWB(joiningPlayer.getUniqueId(), wbMessage);
-            //wbPlayers.put(joiningPlayer.getUniqueId(), wbMessage);
-        }
-        if (fileData.contains("welcome")) {
-            String welcomeMessage = fileData.getString("welcome");
-            AutoWelcome.setPlayerWelcome(joiningPlayer.getUniqueId(), welcomeMessage);
-            //welcomePlayers.put(joiningPlayer.getUniqueId(), welcomeMessage);
+        }*/
+
+        // Only load if the file exists, don't create a new file for every player
+        if (file.exists()) {
+            fileData = YamlConfiguration.loadConfiguration(file);
+            if (fileData.contains("wb")) {
+                String wbMessage = fileData.getString("wb");
+                AutoWelcome.setPlayerWB(joiningPlayer.getUniqueId(), wbMessage);
+                //wbPlayers.put(joiningPlayer.getUniqueId(), wbMessage);
+            }
+            if (fileData.contains("welcome")) {
+                String welcomeMessage = fileData.getString("welcome");
+                AutoWelcome.setPlayerWelcome(joiningPlayer.getUniqueId(), welcomeMessage);
+                //welcomePlayers.put(joiningPlayer.getUniqueId(), welcomeMessage);
+            }
         }
 
         // Make players in HashMap say their wb/welcome

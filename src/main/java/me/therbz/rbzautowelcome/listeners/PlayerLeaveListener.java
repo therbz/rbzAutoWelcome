@@ -18,35 +18,35 @@ public class PlayerLeaveListener implements Listener {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        Player player = event.getPlayer();
-        UUID playerUUID = player.getUniqueId();
+        UUID playerUUID = event.getPlayer().getUniqueId();
 
         // Save player data
-        File file = new File(plugin.getDataFolder() + "/data/", player.getUniqueId().toString() + ".yml");
+        File file = new File(plugin.getDataFolder() + "/data/", playerUUID.toString() + ".yml");
         try {
             FileConfiguration fileData = YamlConfiguration.loadConfiguration(file);
+
             if (AutoWelcome.playerHasSetWB(playerUUID)) {
                 fileData.createSection("wb");
                 fileData.set("wb", AutoWelcome.getPlayerWB(playerUUID));
-            }
-            else {
+            } else {
                 fileData.createSection("wb");
                 fileData.set("wb", null);
             }
+
             if (AutoWelcome.playerHasSetWelcome(playerUUID)) {
                 fileData.createSection("welcome");
                 fileData.set("welcome", AutoWelcome.getPlayerWelcome(playerUUID));
-            }
-            else {
+            } else {
                 fileData.createSection("welcome");
                 fileData.set("welcome", null);
             }
-            fileData.save(file);
+
+            if (AutoWelcome.playerHasSetWB(playerUUID) || AutoWelcome.playerHasSetWelcome(playerUUID)) { fileData.save(file); }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        // Clean up HashMaps
+        // Remove player from HashMaps
         AutoWelcome.removePlayerWB(playerUUID);
         AutoWelcome.removePlayerWelcome(playerUUID);
     }
