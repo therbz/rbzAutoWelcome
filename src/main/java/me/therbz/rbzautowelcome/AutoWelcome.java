@@ -14,8 +14,8 @@ import java.util.HashMap;
 import static org.bukkit.ChatColor.translateAlternateColorCodes;
 
 public class AutoWelcome extends JavaPlugin implements Listener {
-    public static HashMap<UUID, String> wbPlayers = new HashMap<>();
-    public static HashMap<UUID, String> welcomePlayers = new HashMap<>();
+    private static HashMap<UUID, String> wbPlayers = new HashMap<>();
+    private static HashMap<UUID, String> welcomePlayers = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -50,12 +50,9 @@ public class AutoWelcome extends JavaPlugin implements Listener {
         sender.sendMessage(translateAlternateColorCodes('&', message));
     }
 
-    public static boolean playerHasSetWB(UUID uuid) {
-        return wbPlayers.containsKey(uuid);
-    }
-    public static String getPlayerWB(UUID uuid) {
-        return wbPlayers.get(uuid);
-    }
+    // WB access
+    public static boolean playerHasSetWB(UUID uuid) { return wbPlayers.containsKey(uuid); }
+    public static String getPlayerWB(UUID uuid) { return wbPlayers.get(uuid); }
     public static void setPlayerWB(UUID uuid, String string) {
         wbPlayers.put(uuid, string);
     }
@@ -66,12 +63,11 @@ public class AutoWelcome extends JavaPlugin implements Listener {
         return wbPlayers;
     }
 
+    // Welcome access
     public static boolean playerHasSetWelcome(UUID uuid) {
         return welcomePlayers.containsKey(uuid);
     }
-    public static String getPlayerWelcome(UUID uuid) {
-        return welcomePlayers.get(uuid);
-    }
+    public static String getPlayerWelcome(UUID uuid) { return welcomePlayers.get(uuid); }
     public static void setPlayerWelcome(UUID uuid, String string) {
         welcomePlayers.put(uuid, string);
     }
