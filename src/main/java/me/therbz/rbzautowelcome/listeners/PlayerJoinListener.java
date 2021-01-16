@@ -52,7 +52,7 @@ public class PlayerJoinListener implements Listener {
             }
         }
 
-        // Make players in HashMap say their wb/welcome
+        // Make players in HashMap (as long as not-null) say their wb/welcome
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
             @Override
             public void run() {
@@ -64,7 +64,7 @@ public class PlayerJoinListener implements Listener {
                         String msg = mapElement.getValue();
                         Player sendingPlayer = getPlayer(sendingPlayerUuid);
                         // && !msg.equals("off")
-                        if (joiningPlayer!=sendingPlayer && sendingPlayer.hasPermission("rbzaw.set")) { sendingPlayer.chat(msg); }
+                        if (joiningPlayer!=sendingPlayer && sendingPlayer.hasPermission("rbzaw.set") && msg!=null) { sendingPlayer.chat(msg); }
                     });
                 } else {
                     // welcome
@@ -73,7 +73,7 @@ public class PlayerJoinListener implements Listener {
                         UUID sendingPlayerUuid = mapElement.getKey();
                         String msg = mapElement.getValue();
                         Player sendingPlayer = getPlayer(sendingPlayerUuid);
-                        if (joiningPlayer!=sendingPlayer && sendingPlayer.hasPermission("rbzaw.set")) { sendingPlayer.chat(msg); }
+                        if (joiningPlayer!=sendingPlayer && sendingPlayer.hasPermission("rbzaw.set") && msg!=null) { sendingPlayer.chat(msg); }
                     });
                 }
             }

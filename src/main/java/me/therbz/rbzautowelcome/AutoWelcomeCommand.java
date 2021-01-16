@@ -58,7 +58,7 @@ public class AutoWelcomeCommand implements CommandExecutor {
                     // Check self wb
                     if (args[1].equalsIgnoreCase("wb")) {
                         // Check that they have actually set it first
-                        if (!AutoWelcome.playerHasSetWB(p.getUniqueId())) {
+                        if (AutoWelcome.getPlayerWB(p.getUniqueId())==null) {
                             AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.wb.self.check.fail"));
                             return true;
                         }
@@ -71,7 +71,7 @@ public class AutoWelcomeCommand implements CommandExecutor {
                     // Check self welcome
                     if (args[1].equalsIgnoreCase("welcome")) {
                         // Check that they have actually set it first
-                        if (!AutoWelcome.playerHasSetWelcome(p.getUniqueId())) {
+                        if (AutoWelcome.getPlayerWelcome(p.getUniqueId())==null) {
                             AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.welcome.self.check.fail"));
                             return true;
                         }
@@ -104,7 +104,7 @@ public class AutoWelcomeCommand implements CommandExecutor {
                     if (args[1].equalsIgnoreCase("wb")) {
                         // Check that they have actually set it first
                         //if (!wbPlayers.containsKey(p.getUniqueId())) {
-                        if (!AutoWelcome.playerHasSetWB(p.getUniqueId())) {
+                        if (AutoWelcome.getPlayerWB(p.getUniqueId())==null) {
                             AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.wb.other-player.check.fail").replace("%player%", p.getName()));
                             return true;
                         }
@@ -116,7 +116,7 @@ public class AutoWelcomeCommand implements CommandExecutor {
                     else if (args[1].equalsIgnoreCase("welcome")) {
                         // Check that they have actually set it first
                         //if (!welcomePlayers.containsKey(p.getUniqueId())) {
-                        if (!AutoWelcome.playerHasSetWelcome(p.getUniqueId())) {
+                        if (AutoWelcome.getPlayerWelcome(p.getUniqueId())==null) {
                             AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.welcome.other-player.check.fail").replace("%player%", p.getName()));
                             return true;
                         }
@@ -151,8 +151,8 @@ public class AutoWelcomeCommand implements CommandExecutor {
 
                     if (args[1].equalsIgnoreCase("wb")) {
                         if (args[2].equalsIgnoreCase("off")) {
-                            //AutoWelcome.setPlayerWB(p.getUniqueId(), "off");
-                            AutoWelcome.removePlayerWB(p.getUniqueId());
+                            AutoWelcome.setPlayerWB(p.getUniqueId(), null);
+                            //AutoWelcome.removePlayerWB(p.getUniqueId());
                             AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.wb.self.disable"));
                             return true;
                         }
@@ -170,8 +170,8 @@ public class AutoWelcomeCommand implements CommandExecutor {
                     }
                     else if (args[1].equalsIgnoreCase("welcome")) {
                         if (args[2].equalsIgnoreCase("off")) {
-                            //AutoWelcome.setPlayerWelcome(p.getUniqueId(), "off");
-                            AutoWelcome.removePlayerWelcome(p.getUniqueId());
+                            AutoWelcome.setPlayerWelcome(p.getUniqueId(), null);
+                            //AutoWelcome.removePlayerWelcome(p.getUniqueId());
                             AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.welcome.self.disable"));
                             return true;
                         }
@@ -211,8 +211,8 @@ public class AutoWelcomeCommand implements CommandExecutor {
 
                     if (args[1].equalsIgnoreCase("wb")) {
                         if (args[3].equalsIgnoreCase("off")) {
-                            //AutoWelcome.setPlayerWB(p.getUniqueId(), "off");
-                            AutoWelcome.removePlayerWB(p.getUniqueId());
+                            AutoWelcome.setPlayerWB(p.getUniqueId(), null);
+                            //AutoWelcome.removePlayerWB(p.getUniqueId());
                             AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.wb.other-player.disable").replace("%target%", p.getName()));
                             AutoWelcome.messageSender(p, plugin.getConfig().getString("messages.wb.self.disable"));
                             return true;
@@ -233,8 +233,8 @@ public class AutoWelcomeCommand implements CommandExecutor {
                     }
                     else if (args[1].equalsIgnoreCase("welcome")) {
                         if (args[3].equalsIgnoreCase("off")) {
-                            //AutoWelcome.setPlayerWelcome(p.getUniqueId(), "off");
-                            AutoWelcome.removePlayerWelcome(p.getUniqueId());
+                            AutoWelcome.setPlayerWelcome(p.getUniqueId(), null);
+                            //AutoWelcome.removePlayerWelcome(p.getUniqueId());
                             AutoWelcome.messageSender(sender, plugin.getConfig().getString("messages.welcome.other-player.disable").replace("%target%", p.getName()));
                             AutoWelcome.messageSender(p, plugin.getConfig().getString("messages.welcome.self.disable"));
                             return true;

@@ -25,7 +25,9 @@ public class PlayerLeaveListener implements Listener {
         try {
             FileConfiguration fileData = YamlConfiguration.loadConfiguration(file);
 
-            if (AutoWelcome.playerHasSetWB(playerUUID)) {
+            /* Do not need to perform these checks as both execute the same code regardless of null or not
+            // If player has a WB enabled
+            if (AutoWelcome.getPlayerWB(playerUUID)!=null) {
                 fileData.createSection("wb");
                 fileData.set("wb", AutoWelcome.getPlayerWB(playerUUID));
             } else {
@@ -33,15 +35,25 @@ public class PlayerLeaveListener implements Listener {
                 fileData.set("wb", null);
             }
 
-            if (AutoWelcome.playerHasSetWelcome(playerUUID)) {
+            // If player has a Welcome enabled
+            if (AutoWelcome.getPlayerWelcome(playerUUID)!=null) {
                 fileData.createSection("welcome");
                 fileData.set("welcome", AutoWelcome.getPlayerWelcome(playerUUID));
             } else {
                 fileData.createSection("welcome");
                 fileData.set("welcome", null);
             }
+            */
 
-            if (AutoWelcome.playerHasSetWB(playerUUID) || AutoWelcome.playerHasSetWelcome(playerUUID)) { fileData.save(file); }
+            String playerWBMsg=AutoWelcome.getPlayerWB(playerUUID);
+            fileData.createSection("wb");
+            fileData.set("wb", playerWBMsg);
+
+            String playerWelcomeMsg=AutoWelcome.getPlayerWB(playerUUID);
+            fileData.createSection("welcome");
+            fileData.set("welcome", playerWelcomeMsg);
+
+            fileData.save(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
