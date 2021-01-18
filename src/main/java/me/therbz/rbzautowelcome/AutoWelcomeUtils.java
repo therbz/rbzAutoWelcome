@@ -17,7 +17,6 @@ public class AutoWelcomeUtils {
 
     public void welcomeLoop(HashMap<UUID, String> playerMessages, Player player) {
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
-            System.out.println("welcomeLoop FIRED: " + playerMessages.toString());
             for (Map.Entry<UUID, String> mapElement : playerMessages.entrySet()) {
                 UUID sendingPlayerUuid = mapElement.getKey();
                 String msg = mapElement.getValue();
