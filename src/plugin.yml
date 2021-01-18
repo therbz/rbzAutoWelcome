@@ -8,3 +8,22 @@ commands:
     description: Main rbzAutoWelcome command
     usage: /autowb
     aliases: [awb]
+permissions:
+  rbzaw.set:
+    description: Set your own auto wb/welcome messages
+    default: op
+  rbzaw.others:
+    description: Set other players' auto wb/welcome messages
+    default: op
+  rbzaw.check:
+    description: Check your own auto wb/welcome messages
+    default: op
+  rbzaw.check.others:
+    description: Check other players' auto wb/welcome messages
+    default: op
+  rbzaw.bypass.maxlength:
+    description: Bypass max-message-length when setting
+    default: op
+  rbzaw.reload:
+    description: Reload rbzAutoWelcome
+    default: op
