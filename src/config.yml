@@ -8,6 +8,11 @@
 # Default: 20 ticks (1 second)
 message-delay: 20
 
+# The maximum length in characters (excluding '&' colour codes) of wb/welcome messages
+# Bypass this using permission: rbzaw.bypass.maxlength
+# Default: 64
+max-message-length: 64
+
 # Messages
 messages:
   help:
@@ -31,6 +36,7 @@ messages:
   not-player: "&4[rbzAutoWelcome] You must be a player to execute this command!"
   no-permission: "&c&lAUTOWB &8\u00BB &4You do not have permission &c%permission% &4to do this!"
   unknown-player: "&c&lAUTOWB &8\u00BB &4Could not find player &c%target%&4!"
+  exceeded-max-length: "&c&lAUTOWB &8\u00BB &4Maximum message length is &c%length% &4characters!"
   reload: "&6&lAUTOWB &8\u00BB &aSuccessfully reloaded &frbzAutoWelcome"
 
   wb:
@@ -70,4 +76,4 @@ messages:
         fail: "&c&lAUTOWB &8\u00BB &c%player% &4has not set an auto-welcome message!"
 
 # DO NOT TOUCH
-config-version: 1
+config-version: 2
