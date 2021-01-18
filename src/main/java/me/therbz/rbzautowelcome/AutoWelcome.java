@@ -1,5 +1,6 @@
 package me.therbz.rbzautowelcome;
 
+import me.therbz.rbzautowelcome.listeners.EssentialsAfkListener;
 import me.therbz.rbzautowelcome.listeners.PlayerJoinListener;
 import me.therbz.rbzautowelcome.listeners.PlayerLeaveListener;
 import org.bukkit.Bukkit;
@@ -23,19 +24,24 @@ public class AutoWelcome extends JavaPlugin implements Listener {
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
 
-        // Register listeners
+        // Register Bukkit listeners
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerLeaveListener(), this);
+
+        // Register Essentials listeners
+        if (Bukkit.getPluginManager().getPlugin("Essentials")!=null) {
+            //System.out.println("Essentials FOUND");
+            Bukkit.getServer().getPluginManager().registerEvents(new EssentialsAfkListener(), this);
+        }
 
         // Register commands
         Objects.requireNonNull(getCommand("autowb")).setExecutor(new AutoWelcomeCommand());
 
         // Set up bStats metrics
-        final int BSTATS_PLUGIN_ID = 9814;
-        MetricsLite metrics = new MetricsLite(this, BSTATS_PLUGIN_ID);
+        MetricsLite metrics = new MetricsLite(this, 9814);
 
         // Check that the config is up-to-date
-        final int CURRENT_CONFIG_VERSION = 3; // Update this as necessary
+        final int CURRENT_CONFIG_VERSION = 4; // Update this as necessary
         int config_version = getConfig().getInt("config-version");
 
         if(config_version < CURRENT_CONFIG_VERSION) {

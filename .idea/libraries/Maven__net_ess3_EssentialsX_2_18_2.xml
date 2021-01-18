@@ -8,6 +8,18 @@
     </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/net/ess3/EssentialsX/2.18.2/EssentialsX-2.18.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../Downloads/Essentials-2.x.zip!/Essentials-2.x/EssentialsAntiBuild/src/main/java" />
+      <root url="jar://$PROJECT_DIR$/../../Downloads/Essentials-2.x.zip!/Essentials-2.x/EssentialsChat/src/main/java" />
+      <root url="jar://$PROJECT_DIR$/../../Downloads/Essentials-2.x.zip!/Essentials-2.x/EssentialsGeoIP/src/main/java" />
+      <root url="jar://$PROJECT_DIR$/../../Downloads/Essentials-2.x.zip!/Essentials-2.x/EssentialsProtect/src/main/java" />
+      <root url="jar://$PROJECT_DIR$/../../Downloads/Essentials-2.x.zip!/Essentials-2.x/EssentialsSpawn/src/main/java" />
+      <root url="jar://$PROJECT_DIR$/../../Downloads/Essentials-2.x.zip!/Essentials-2.x/EssentialsXMPP/src/main/java" />
+      <root url="jar://$PROJECT_DIR$/../../Downloads/Essentials-2.x.zip!/Essentials-2.x/Essentials/src/main/java" />
+      <root url="jar://$PROJECT_DIR$/../../Downloads/Essentials-2.x.zip!/Essentials-2.x/Essentials/src/test/java" />
+      <root url="jar://$PROJECT_DIR$/../../Downloads/Essentials-2.x.zip!/Essentials-2.x/providers/1_8Provider/src/main/java" />
+      <root url="jar://$PROJECT_DIR$/../../Downloads/Essentials-2.x.zip!/Essentials-2.x/providers/BaseProviders/src/main/java" />
+      <root url="jar://$PROJECT_DIR$/../../Downloads/Essentials-2.x.zip!/Essentials-2.x/providers/NMSReflectionProvider/src/main/java" />
+      <root url="jar://$PROJECT_DIR$/../../Downloads/Essentials-2.x.zip!/Essentials-2.x/providers/PaperProvider/src/main/java" />
     </SOURCES>
   </library>
 </component>

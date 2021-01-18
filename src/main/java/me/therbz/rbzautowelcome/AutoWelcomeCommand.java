@@ -1,5 +1,6 @@
 package me.therbz.rbzautowelcome;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -53,7 +54,7 @@ public class AutoWelcomeCommand implements CommandExecutor {
                         return true;
                     }
                     Player p = (Player) sender;
-
+                    
                     // Check that sender has permission
                     if (!sender.hasPermission("rbzaw.check")) {
                         messageSender(sender, config.getString("messages.no-permission").replace("%permission%", "rbzaw.check"));

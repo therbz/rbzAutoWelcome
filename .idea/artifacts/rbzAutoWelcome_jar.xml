@@ -3,8 +3,6 @@
     <output-path>$PROJECT_DIR$/out/artifacts/rbzAutoWelcome_jar</output-path>
     <root id="archive" name="rbzAutoWelcome.jar">
       <element id="module-output" name="rbzAutoWelcome" />
-      <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/config.yml" />
-      <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/plugin.yml" />
     </root>
   </artifact>
 </component>

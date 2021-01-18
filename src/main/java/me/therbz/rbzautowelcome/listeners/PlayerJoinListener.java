@@ -1,6 +1,7 @@
 package me.therbz.rbzautowelcome.listeners;
 
 import me.therbz.rbzautowelcome.AutoWelcome;
+import me.therbz.rbzautowelcome.AutoWelcomeUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -11,23 +12,18 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.UUID;
 
-import static org.bukkit.Bukkit.getPlayer;
-
 public class PlayerJoinListener implements Listener {
-    private JavaPlugin plugin = AutoWelcome.getPlugin(AutoWelcome.class);
-    private File file;
-    private FileConfiguration fileData;
+    private final JavaPlugin plugin = AutoWelcome.getPlugin(AutoWelcome.class);
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player joiningPlayer = event.getPlayer();
 
         // read from playerdata file
-        file = new File(plugin.getDataFolder() + "/data/", joiningPlayer.getUniqueId().toString() + ".yml");
+        File file = new File(plugin.getDataFolder() + "/data/", joiningPlayer.getUniqueId().toString() + ".yml");
         /*if (!file.exists()) {
             try {
                 fileData = YamlConfiguration.loadConfiguration(file);
@@ -39,7 +35,7 @@ public class PlayerJoinListener implements Listener {
 
         // Only load if the file exists, don't create a new file for every player
         if (file.exists()) {
-            fileData = YamlConfiguration.loadConfiguration(file);
+            FileConfiguration fileData = YamlConfiguration.loadConfiguration(file);
             if (fileData.contains("wb")) {
                 String wbMessage = fileData.getString("wb");
                 AutoWelcome.setPlayerWB(joiningPlayer.getUniqueId(), wbMessage);
@@ -52,31 +48,13 @@ public class PlayerJoinListener implements Listener {
             }
         }
 
+        // If joiningPlayer is returning, set playersCopy to WB
+        HashMap<UUID, String> playerMessages;
+        if (joiningPlayer.hasPlayedBefore()) { playerMessages = AutoWelcome.copyOfWBPlayers(); }
+        else { playerMessages = AutoWelcome.copyOfWelcomePlayers(); }
+
         // Make players in HashMap (as long as not-null) say their wb/welcome
-        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-            @Override
-            public void run() {
-                // wb
-                if (joiningPlayer.hasPlayedBefore()) {
-                    HashMap<UUID, String> wbPlayersCopy = AutoWelcome.copyOfWBPlayers();
-                    wbPlayersCopy.entrySet().forEach(mapElement -> {
-                        UUID sendingPlayerUuid = mapElement.getKey();
-                        String msg = mapElement.getValue();
-                        Player sendingPlayer = getPlayer(sendingPlayerUuid);
-                        // && !msg.equals("off")
-                        if (joiningPlayer!=sendingPlayer && sendingPlayer.hasPermission("rbzaw.set") && msg!=null) { sendingPlayer.chat(msg); }
-                    });
-                } else {
-                    // welcome
-                    HashMap<UUID, String> welcomePlayersCopy = AutoWelcome.copyOfWelcomePlayers();
-                    welcomePlayersCopy.entrySet().forEach(mapElement -> {
-                        UUID sendingPlayerUuid = mapElement.getKey();
-                        String msg = mapElement.getValue();
-                        Player sendingPlayer = getPlayer(sendingPlayerUuid);
-                        if (joiningPlayer!=sendingPlayer && sendingPlayer.hasPermission("rbzaw.set") && msg!=null) { sendingPlayer.chat(msg); }
-                    });
-                }
-            }
-        }, plugin.getConfig().getLong("message-delay"));
+        AutoWelcomeUtils utils = new AutoWelcomeUtils();
+        utils.welcomeLoop(playerMessages, joiningPlayer);
     }
 }

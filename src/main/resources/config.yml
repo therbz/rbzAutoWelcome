@@ -1,6 +1,6 @@
 #########################################
 #                                       #
-#    rbzAutoWelcome v1.3.1 by therbz    #
+#    rbzAutoWelcome v1.4.0 by therbz    #
 #                                       #
 #########################################
 
@@ -12,6 +12,17 @@ message-delay: 20
 # Bypass this using permission: rbzaw.bypass.maxlength
 # Default: 64
 max-message-length: 64
+
+# Plugin hooks
+hooks:
+  essentials:
+    # Enable the Essentials hook (only works if Essentials is found)
+    enabled: true
+    # Automatically welcome/ welcome back players who stop being AFK
+    wb-returning-afk: true
+    # Prevent players who are AFK from automatically welcoming/ wb'ing-
+    # thus stopping the messaging player from exiting AFK state
+    prevent-afk-messaging: true
 
 # Messages
 messages:
@@ -76,4 +87,4 @@ messages:
         fail: "&c&lAUTOWB &8\u00BB &c%player% &4has not set an auto-welcome message!"
 
 # DO NOT TOUCH
-config-version: 3
+config-version: 4
