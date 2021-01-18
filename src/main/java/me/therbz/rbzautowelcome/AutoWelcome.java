@@ -35,7 +35,7 @@ public class AutoWelcome extends JavaPlugin implements Listener {
         MetricsLite metrics = new MetricsLite(this, BSTATS_PLUGIN_ID);
 
         // Check that the config is up-to-date
-        final int CURRENT_CONFIG_VERSION = 2; // Update this as necessary
+        final int CURRENT_CONFIG_VERSION = 3; // Update this as necessary
         int config_version = getConfig().getInt("config-version");
 
         if(config_version < CURRENT_CONFIG_VERSION) {

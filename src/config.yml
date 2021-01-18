@@ -1,6 +1,6 @@
 #########################################
 #                                       #
-#    rbzAutoWelcome v1.3.0 by therbz    #
+#    rbzAutoWelcome v1.3.1 by therbz    #
 #                                       #
 #########################################
 
@@ -25,7 +25,7 @@ messages:
     - "&7Check your (or another player's) auto wb or welcome message"
     - "&e/autowb set &f<wb|welcome> <message|off>"
     - "&7Sets your auto wb or welcome message"
-    - "&e/autowb setplayer &f<wb|welcome> <player> <message|off>"
+    - "&e/autowb setplayer &f<player> <wb|welcome> <message|off>"
     - "&7Sets another player's auto wb or welcome message"
     - "&e/autowb reload"
     - "&7Reloads the plugin's config"
@@ -76,4 +76,4 @@ messages:
         fail: "&c&lAUTOWB &8\u00BB &c%player% &4has not set an auto-welcome message!"
 
 # DO NOT TOUCH
-config-version: 2
+config-version: 3

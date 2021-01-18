@@ -224,13 +224,13 @@ public class AutoWelcomeCommand implements CommandExecutor {
                     }
 
                     // Check that target exists
-                    if (getPlayer(args[2])==null) {
-                        messageSender(sender, config.getString("messages.not-player").replace("%target%", args[2]));
+                    if (getPlayer(args[1])==null) {
+                        messageSender(sender, config.getString("messages.unknown-player").replace("%target%", args[1]));
                         return true;
                     }
-                    Player p = getPlayer(args[2]);
+                    Player p = getPlayer(args[1]);
 
-                    if (args[1].equalsIgnoreCase("wb")) {
+                    if (args[2].equalsIgnoreCase("wb")) {
                         if (args[3].equalsIgnoreCase("off")) {
                             setPlayerWB(p.getUniqueId(), null);
                             //removePlayerWB(p.getUniqueId());
@@ -254,12 +254,12 @@ public class AutoWelcomeCommand implements CommandExecutor {
                         }
 
                         //wbPlayers.put(p.getUniqueId(), args[3]);
-                        setPlayerWB(p.getUniqueId(), message.toString());
+                        setPlayerWB(p.getUniqueId(), message);
                         messageSender(sender, config.getString("messages.wb.other-player.enable").replace("%msg%", message).replace("%target%", p.getName()));
                         messageSender(p, config.getString("messages.wb.self.enable").replace("%msg%", message));
                         return true;
                     }
-                    else if (args[1].equalsIgnoreCase("welcome")) {
+                    else if (args[2].equalsIgnoreCase("welcome")) {
                         if (args[3].equalsIgnoreCase("off")) {
                             setPlayerWelcome(p.getUniqueId(), null);
                             //removePlayerWelcome(p.getUniqueId());
@@ -290,7 +290,7 @@ public class AutoWelcomeCommand implements CommandExecutor {
                     }
                 }
                 // Not 4 arguments
-                messageSender(sender, config.getString("messages.incorrect-usage").replace("%usage%", "/autowb setplayer <wb|welcome> <player> <message|off>"));
+                messageSender(sender, config.getString("messages.incorrect-usage").replace("%usage%", "/autowb setplayer <player> <wb|welcome> <message|off>"));
                 return true;
             }
         }

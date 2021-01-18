@@ -49,7 +49,7 @@ public class PlayerLeaveListener implements Listener {
             fileData.createSection("wb");
             fileData.set("wb", playerWBMsg);
 
-            String playerWelcomeMsg=AutoWelcome.getPlayerWB(playerUUID);
+            String playerWelcomeMsg=AutoWelcome.getPlayerWelcome(playerUUID);
             fileData.createSection("welcome");
             fileData.set("welcome", playerWelcomeMsg);
 
