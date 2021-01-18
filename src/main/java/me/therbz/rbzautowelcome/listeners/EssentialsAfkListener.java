@@ -21,7 +21,6 @@ public class EssentialsAfkListener implements Listener {
 
         // If essentials hook enabled and essentials wb-returning-afk enables and the player is going UN-afk and the cause ISN'T quitting
         if (plugin.getConfig().getBoolean("hooks.essentials.enabled") && plugin.getConfig().getBoolean("hooks.essentials.wb-returning-afk") && !event.getValue() && event.getCause()!=AfkStatusChangeEvent.Cause.QUIT) {
-            System.out.println("onPlayerUnAfk FIRED");
 
             HashMap<UUID, String> playerMessages = AutoWelcome.copyOfWBPlayers();
             Player player = event.getAffected().getBase();

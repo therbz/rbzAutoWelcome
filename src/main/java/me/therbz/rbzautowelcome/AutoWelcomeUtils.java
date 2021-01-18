@@ -30,7 +30,6 @@ public class AutoWelcomeUtils {
                 if (ess != null && essHookEnabled && essHookPreventAfkMessaging) {
                     Essentials essentials = (Essentials) ess;
                     senderIsAFK = essentials.getUser(messagingPlayer).isAfk();
-                    System.out.println("ess exists");
                 }
 
                 if (player != messagingPlayer && messagingPlayer.hasPermission("rbzaw.set") && !senderIsAFK && msg != null) {
