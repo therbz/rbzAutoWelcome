@@ -51,8 +51,6 @@ public class AutoWelcome extends JavaPlugin implements Listener {
     }
 
     // WB access
-    /* DEPRECATED - use getPlayerWB!=null
-    public static boolean playerHasSetWB(UUID uuid) { return wbPlayers.containsKey(uuid); }*/
     public static String getPlayerWB(UUID uuid) { return wbPlayers.get(uuid); }
     public static void setPlayerWB(UUID uuid, String string) {
         wbPlayers.put(uuid, string);
@@ -65,12 +63,6 @@ public class AutoWelcome extends JavaPlugin implements Listener {
     }
 
     // Welcome access
-    /* DEPRECATED - use getPlayerWelcome!=null
-    public static boolean playerHasSetWelcome(UUID uuid) {
-        String msg = welcomePlayers.get(uuid);
-        if (!msg.equals("")) { return welcomePlayers.containsKey(uuid); }
-        else { return false; }
-    }*/
     public static String getPlayerWelcome(UUID uuid) { return welcomePlayers.get(uuid); }
     public static void setPlayerWelcome(UUID uuid, String string) {
         welcomePlayers.put(uuid, string);
