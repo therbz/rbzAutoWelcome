@@ -1,6 +1,6 @@
 #########################################
 #                                       #
-#    rbzAutoWelcome v1.4.1 by therbz    #
+#    rbzAutoWelcome v1.5.0 by therbz    #
 #                                       #
 #########################################
 
@@ -92,4 +92,4 @@ messages:
         fail: "&c&lAUTOWB &8\u00BB &c%player% &4has not set an auto-welcome message!"
 
 # DO NOT TOUCH
-config-version: 4
+config-version: 5
