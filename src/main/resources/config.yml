@@ -24,6 +24,11 @@ hooks:
     # thus stopping the messaging player from exiting AFK state
     prevent-afk-messaging: true
 
+# Placeholders
+placeholders:
+  # Replaced by a players' name when being welcome'd
+  joining-player: "@p"
+
 # Messages
 messages:
   help:

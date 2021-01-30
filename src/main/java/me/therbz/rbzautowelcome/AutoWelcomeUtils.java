@@ -15,12 +15,14 @@ import static org.bukkit.Bukkit.getPlayer;
 public class AutoWelcomeUtils {
     private final JavaPlugin plugin = AutoWelcome.getPlugin(AutoWelcome.class);
 
-    public void welcomeLoop(HashMap<UUID, String> playerMessages, Player player) {
+    public void welcomeLoop(HashMap<UUID, String> playerMessages, Player joiningPlayer) {
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
             for (Map.Entry<UUID, String> mapElement : playerMessages.entrySet()) {
                 UUID sendingPlayerUuid = mapElement.getKey();
-                String msg = mapElement.getValue();
-                Player messagingPlayer = getPlayer(sendingPlayerUuid);
+                String joiningPlayerName = joiningPlayer.getName();
+                String playerPlaceholder = plugin.getConfig().getString("placeholders.joining-player");
+                String msg = mapElement.getValue().replaceAll(playerPlaceholder, joiningPlayerName);
+                Player sendingPlayer = getPlayer(sendingPlayerUuid);
 
                 boolean essHookEnabled = plugin.getConfig().getBoolean("hooks.essentials.enabled");
                 boolean essHookPreventAfkMessaging = plugin.getConfig().getBoolean("hooks.essentials.prevent-afk-messaging");
@@ -28,11 +30,11 @@ public class AutoWelcomeUtils {
                 boolean senderIsAFK = false;
                 if (ess != null && essHookEnabled && essHookPreventAfkMessaging) {
                     Essentials essentials = (Essentials) ess;
-                    senderIsAFK = essentials.getUser(messagingPlayer).isAfk();
+                    senderIsAFK = essentials.getUser(sendingPlayer).isAfk();
                 }
 
-                if (player != messagingPlayer && messagingPlayer.hasPermission("rbzaw.set") && !senderIsAFK && msg != null) {
-                    messagingPlayer.chat(msg);
+                if (joiningPlayer != sendingPlayer && sendingPlayer.hasPermission("rbzaw.set") && !senderIsAFK && msg != null) {
+                    sendingPlayer.chat(msg);
                 }
             }
         }, plugin.getConfig().getLong("message-delay"));
