@@ -5,8 +5,9 @@
 #########################################
 
 # The amount of ticks before the plugin forces players to say their wb/welcome message
-# Default: 20 ticks (1 second)
-message-delay: 20
+# 20 ticks = 1 second
+message-delay-min: 35
+message-delay-max: 110
 
 # The maximum length in characters (excluding '&' colour codes) of wb/welcome messages
 # Bypass this using permission: rbzaw.bypass.maxlength
@@ -92,4 +93,4 @@ messages:
         fail: "&c&lAUTOWB &8\u00BB &c%player% &4has not set an auto-welcome message!"
 
 # DO NOT TOUCH
-config-version: 5
+config-version: 6
