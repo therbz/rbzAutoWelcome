@@ -19,8 +19,8 @@
         <JAVADOC />
         <SOURCES>
           <root url="jar://$MODULE_DIR$/../spigot-1.16.4.jar!/" />
-          <root url="jar://$MODULE_DIR$/../../Downloads/bukkit-master@0958895aefc.zip!/src/main/java" />
-          <root url="jar://$MODULE_DIR$/../../Downloads/bukkit-master@0958895aefc.zip!/src/test/java" />
+          <root url="jar://$USER_HOME$/Downloads/bukkit-master@0958895aefc.zip!/src/main/java" />
+          <root url="jar://$USER_HOME$/Downloads/bukkit-master@0958895aefc.zip!/src/test/java" />
         </SOURCES>
       </library>
     </orderEntry>
