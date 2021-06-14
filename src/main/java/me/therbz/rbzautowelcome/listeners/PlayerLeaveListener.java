@@ -14,7 +14,11 @@ import java.io.IOException;
 import java.util.UUID;
 
 public class PlayerLeaveListener implements Listener {
-    private final JavaPlugin plugin = AutoWelcome.getPlugin(AutoWelcome.class);
+    private final AutoWelcome plugin;
+
+    public PlayerLeaveListener(AutoWelcome plugin) {
+        this.plugin = plugin;
+    }
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {

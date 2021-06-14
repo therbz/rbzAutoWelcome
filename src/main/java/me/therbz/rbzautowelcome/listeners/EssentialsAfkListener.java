@@ -12,7 +12,11 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class EssentialsAfkListener implements Listener {
-    private final JavaPlugin plugin = AutoWelcome.getPlugin(AutoWelcome.class);
+    private final AutoWelcome plugin;
+
+    public EssentialsAfkListener(AutoWelcome plugin) {
+        this.plugin = plugin;
+    }
 
     @EventHandler
     public void onPlayerUnAfk(AfkStatusChangeEvent event) {
@@ -25,7 +29,7 @@ public class EssentialsAfkListener implements Listener {
             HashMap<UUID, String> playerMessages = AutoWelcome.copyOfWBPlayers();
             Player player = event.getAffected().getBase();
 
-            AutoWelcomeUtils utils = new AutoWelcomeUtils();
+            AutoWelcomeUtils utils = new AutoWelcomeUtils(plugin);
             utils.welcomeLoop(playerMessages, player);
         }
     }

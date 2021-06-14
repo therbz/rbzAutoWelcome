@@ -15,14 +15,17 @@ import static org.bukkit.ChatColor.translateAlternateColorCodes;
 import static org.bukkit.ChatColor.stripColor;
 
 public class AutoWelcomeCommand implements CommandExecutor {
-    private final JavaPlugin plugin = getPlugin(AutoWelcome.class);
-    private final FileConfiguration config = plugin.getConfig();
+    private final AutoWelcome plugin;
+
+    public AutoWelcomeCommand(AutoWelcome plugin) {
+        this.plugin = plugin;
+    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         // 0 args, send help menu
         if (args.length==0) {
-            List<String> help = config.getStringList("messages.help");
+            List<String> help = plugin.getConfig().getStringList("messages.help");
             for (String m : help) {
                 messageSender(sender, m);
             }
@@ -32,13 +35,13 @@ public class AutoWelcomeCommand implements CommandExecutor {
             if (args[0].equalsIgnoreCase("reload")) {
                 // Check that the sender has permission
                 if (!sender.hasPermission("rbzaw.reload")) {
-                    messageSender(sender, config.getString("messages.no-permission").replace("%permission%", "rbzaw.reload"));
+                    messageSender(sender, plugin.getConfig().getString("messages.no-permission").replace("%permission%", "rbzaw.reload"));
                     return true;
                 }
 
                 // Reload
                 plugin.reloadConfig();
-                messageSender(sender, config.getString("messages.reload"));
+                messageSender(sender, plugin.getConfig().getString("messages.reload"));
                 plugin.getLogger().info("Reloaded rbzAutoWelcome v" + plugin.getDescription().getVersion());
                 return true;
             }
@@ -49,14 +52,14 @@ public class AutoWelcomeCommand implements CommandExecutor {
                 if (args.length==2) {
                     // Check that the sender is a player
                     if (!(sender instanceof Player)) {
-                        messageSender(sender, config.getString("messages.not-player"));
+                        messageSender(sender, plugin.getConfig().getString("messages.not-player"));
                         return true;
                     }
                     Player p = (Player) sender;
                     
                     // Check that sender has permission
                     if (!sender.hasPermission("rbzaw.check")) {
-                        messageSender(sender, config.getString("messages.no-permission").replace("%permission%", "rbzaw.check"));
+                        messageSender(sender, plugin.getConfig().getString("messages.no-permission").replace("%permission%", "rbzaw.check"));
                         return true;
                     }
 
@@ -64,12 +67,12 @@ public class AutoWelcomeCommand implements CommandExecutor {
                     if (args[1].equalsIgnoreCase("wb")) {
                         // Check that they have actually set it first
                         if (getPlayerWB(p.getUniqueId())==null) {
-                            messageSender(sender, config.getString("messages.wb.self.check.fail"));
+                            messageSender(sender, plugin.getConfig().getString("messages.wb.self.check.fail"));
                             return true;
                         }
 
                         // Tell the player their auto-wb message
-                        messageSender(sender, config.getString("messages.wb.self.check.success").replace("%msg%", getPlayerWB(p.getUniqueId())));
+                        messageSender(sender, plugin.getConfig().getString("messages.wb.self.check.success").replace("%msg%", getPlayerWB(p.getUniqueId())));
                         return true;
                     }
 
@@ -77,17 +80,17 @@ public class AutoWelcomeCommand implements CommandExecutor {
                     if (args[1].equalsIgnoreCase("welcome")) {
                         // Check that they have actually set it first
                         if (getPlayerWelcome(p.getUniqueId())==null) {
-                            messageSender(sender, config.getString("messages.welcome.self.check.fail"));
+                            messageSender(sender, plugin.getConfig().getString("messages.welcome.self.check.fail"));
                             return true;
                         }
 
                         // Tell the player their auto-wb message
-                        messageSender(sender, config.getString("messages.welcome.self.check.success").replace("%msg%",  getPlayerWelcome(p.getUniqueId())));
+                        messageSender(sender, plugin.getConfig().getString("messages.welcome.self.check.success").replace("%msg%",  getPlayerWelcome(p.getUniqueId())));
                         return true;
                     }
 
                     // They didn't put "wb" or "welcome"
-                    messageSender(sender, config.getString("messages.incorrect-usage").replace("%usage%","/autowb check <wb|welcome> [player]"));
+                    messageSender(sender, plugin.getConfig().getString("messages.incorrect-usage").replace("%usage%","/autowb check <wb|welcome> [player]"));
                     return true;
                 }
 
@@ -95,13 +98,13 @@ public class AutoWelcomeCommand implements CommandExecutor {
                 else if (args.length==3) {
                     // Check that sender has permission
                     if (!sender.hasPermission("rbzaw.check.others")) {
-                        messageSender(sender, config.getString("messages.no-permission").replace("%permission%", "rbzaw.check.others"));
+                        messageSender(sender, plugin.getConfig().getString("messages.no-permission").replace("%permission%", "rbzaw.check.others"));
                         return true;
                     }
 
                     // Check that player exists
                     if (getPlayer(args[2])==null) {
-                        messageSender(sender, config.getString("messages.unknown-player").replace("%target%", args[2]));
+                        messageSender(sender, plugin.getConfig().getString("messages.unknown-player").replace("%target%", args[2]));
                         return true;
                     }
                     Player p = getPlayer(args[2]);
@@ -110,30 +113,30 @@ public class AutoWelcomeCommand implements CommandExecutor {
                         // Check that they have actually set it first
                         //if (!wbPlayers.containsKey(p.getUniqueId())) {
                         if (getPlayerWB(p.getUniqueId())==null) {
-                            messageSender(sender, config.getString("messages.wb.other-player.check.fail").replace("%player%", p.getName()));
+                            messageSender(sender, plugin.getConfig().getString("messages.wb.other-player.check.fail").replace("%player%", p.getName()));
                             return true;
                         }
 
                         // Tell the player their auto-wb message
-                        messageSender(sender, config.getString("messages.wb.other-player.check.success").replace("%msg%", getPlayerWB(p.getUniqueId())).replace("%player%", p.getName()));
+                        messageSender(sender, plugin.getConfig().getString("messages.wb.other-player.check.success").replace("%msg%", getPlayerWB(p.getUniqueId())).replace("%player%", p.getName()));
                         return true;
                     }
                     else if (args[1].equalsIgnoreCase("welcome")) {
                         // Check that they have actually set it first
                         //if (!welcomePlayers.containsKey(p.getUniqueId())) {
                         if (getPlayerWelcome(p.getUniqueId())==null) {
-                            messageSender(sender, config.getString("messages.welcome.other-player.check.fail").replace("%player%", p.getName()));
+                            messageSender(sender, plugin.getConfig().getString("messages.welcome.other-player.check.fail").replace("%player%", p.getName()));
                             return true;
                         }
 
                         // Tell the player their auto-wb message
-                        messageSender(sender, config.getString("messages.welcome.other-player.check.success").replace("%msg%", getPlayerWelcome(p.getUniqueId())).replace("%player%", p.getName()));
+                        messageSender(sender, plugin.getConfig().getString("messages.welcome.other-player.check.success").replace("%msg%", getPlayerWelcome(p.getUniqueId())).replace("%player%", p.getName()));
                         return true;
                     }
                 }
 
                 // Sender didn't put 2 or 3 arguments
-                messageSender(sender, config.getString("messages.incorrect-usage").replace("%usage%", "/autowb check <wb|welcome> [player]"));
+                messageSender(sender, plugin.getConfig().getString("messages.incorrect-usage").replace("%usage%", "/autowb check <wb|welcome> [player]"));
                 return true;
             }
 
@@ -143,14 +146,14 @@ public class AutoWelcomeCommand implements CommandExecutor {
                 if (args.length>=3) {
                     // Check that the sender is a player
                     if (!(sender instanceof Player)) {
-                        messageSender(sender, config.getString("messages.not-player"));
+                        messageSender(sender, plugin.getConfig().getString("messages.not-player"));
                         return true;
                     }
                     Player p = (Player) sender;
 
                     // Check that sender has permission
                     if (!sender.hasPermission("rbzaw.set")) {
-                        messageSender(sender, config.getString("messages.no-permission").replace("%permission%", "rbzaw.set"));
+                        messageSender(sender, plugin.getConfig().getString("messages.no-permission").replace("%permission%", "rbzaw.set"));
                         return true;
                     }
 
@@ -158,7 +161,7 @@ public class AutoWelcomeCommand implements CommandExecutor {
                         if (args[2].equalsIgnoreCase("off")) {
                             setPlayerWB(p.getUniqueId(), null);
                             //removePlayerWB(p.getUniqueId());
-                            messageSender(sender, config.getString("messages.wb.self.disable"));
+                            messageSender(sender, plugin.getConfig().getString("messages.wb.self.disable"));
                             return true;
                         }
 
@@ -170,22 +173,22 @@ public class AutoWelcomeCommand implements CommandExecutor {
 
                         // If message length exceeds max, and sender does not have permission to go over max then cancel
                         String messageNoColour = stripColor(translateAlternateColorCodes('&', message));
-                        int maxMessageLength=config.getInt("max-message-length");
+                        int maxMessageLength=plugin.getConfig().getInt("max-message-length");
                         if(messageNoColour.length()>maxMessageLength && !sender.hasPermission("rbzaw.bypass.maxlength")) {
-                                messageSender(sender, config.getString("messages.exceeded-max-length").replace("%length%", String.valueOf(maxMessageLength)));
+                                messageSender(sender, plugin.getConfig().getString("messages.exceeded-max-length").replace("%length%", String.valueOf(maxMessageLength)));
                                 return true;
                         }
 
                         //wbPlayers.put(p.getUniqueId(), args[2]);
                         setPlayerWB(p.getUniqueId(), message);
-                        messageSender(sender, config.getString("messages.wb.self.enable").replace("%msg%", message));
+                        messageSender(sender, plugin.getConfig().getString("messages.wb.self.enable").replace("%msg%", message));
                         return true;
                     }
                     else if (args[1].equalsIgnoreCase("welcome")) {
                         if (args[2].equalsIgnoreCase("off")) {
                             setPlayerWelcome(p.getUniqueId(), null);
                             //removePlayerWelcome(p.getUniqueId());
-                            messageSender(sender, config.getString("messages.welcome.self.disable"));
+                            messageSender(sender, plugin.getConfig().getString("messages.welcome.self.disable"));
                             return true;
                         }
 
@@ -197,20 +200,20 @@ public class AutoWelcomeCommand implements CommandExecutor {
 
                         // If message length exceeds max, and sender does not have permission to go over max then cancel
                         String messageNoColour = stripColor(translateAlternateColorCodes('&', message));
-                        int maxMessageLength=config.getInt("max-message-length");
+                        int maxMessageLength=plugin.getConfig().getInt("max-message-length");
                         if(messageNoColour.length()>maxMessageLength && !sender.hasPermission("rbzaw.bypass.maxlength")) {
-                            messageSender(sender, config.getString("messages.exceeded-max-length").replace("%length%", String.valueOf(maxMessageLength)));
+                            messageSender(sender, plugin.getConfig().getString("messages.exceeded-max-length").replace("%length%", String.valueOf(maxMessageLength)));
                             return true;
                         }
 
                         //welcomePlayers.put(p.getUniqueId(), args[2]);
                         setPlayerWelcome(p.getUniqueId(), message);
-                        messageSender(sender, config.getString("messages.welcome.self.enable").replace("%msg%", message));
+                        messageSender(sender, plugin.getConfig().getString("messages.welcome.self.enable").replace("%msg%", message));
                         return true;
                     }
                 }
                 // Sender didn't put at least 3 arguments
-                messageSender(sender, config.getString("messages.incorrect-usage").replace("%usage%", "/autowb set <wb|welcome> <message|off>"));
+                messageSender(sender, plugin.getConfig().getString("messages.incorrect-usage").replace("%usage%", "/autowb set <wb|welcome> <message|off>"));
                 return true;
             }
             // /autowb setplayer <wb|welcome> <player> <message>
@@ -219,13 +222,13 @@ public class AutoWelcomeCommand implements CommandExecutor {
                 if (args.length>=4) {
                     // Check that sender has permission
                     if (!sender.hasPermission("rbzaw.set.others")) {
-                        messageSender(sender, config.getString("messages.no-permission").replace("%permission%", "rbzaw.set.others"));
+                        messageSender(sender, plugin.getConfig().getString("messages.no-permission").replace("%permission%", "rbzaw.set.others"));
                         return true;
                     }
 
                     // Check that target exists
                     if (getPlayer(args[1])==null) {
-                        messageSender(sender, config.getString("messages.unknown-player").replace("%target%", args[1]));
+                        messageSender(sender, plugin.getConfig().getString("messages.unknown-player").replace("%target%", args[1]));
                         return true;
                     }
                     Player p = getPlayer(args[1]);
@@ -234,8 +237,8 @@ public class AutoWelcomeCommand implements CommandExecutor {
                         if (args[3].equalsIgnoreCase("off")) {
                             setPlayerWB(p.getUniqueId(), null);
                             //removePlayerWB(p.getUniqueId());
-                            messageSender(sender, config.getString("messages.wb.other-player.disable").replace("%target%", p.getName()));
-                            messageSender(p, config.getString("messages.wb.self.disable"));
+                            messageSender(sender, plugin.getConfig().getString("messages.wb.other-player.disable").replace("%target%", p.getName()));
+                            messageSender(p, plugin.getConfig().getString("messages.wb.self.disable"));
                             return true;
                         }
 
@@ -247,24 +250,24 @@ public class AutoWelcomeCommand implements CommandExecutor {
 
                         // If message length exceeds max, and sender does not have permission to go over max then cancel
                         String messageNoColour = stripColor(translateAlternateColorCodes('&', message));
-                        int maxMessageLength=config.getInt("max-message-length");
+                        int maxMessageLength=plugin.getConfig().getInt("max-message-length");
                         if(messageNoColour.length()>maxMessageLength && !sender.hasPermission("rbzaw.bypass.maxlength")) {
-                            messageSender(sender, config.getString("messages.exceeded-max-length").replace("%length%", String.valueOf(maxMessageLength)));
+                            messageSender(sender, plugin.getConfig().getString("messages.exceeded-max-length").replace("%length%", String.valueOf(maxMessageLength)));
                             return true;
                         }
 
                         //wbPlayers.put(p.getUniqueId(), args[3]);
                         setPlayerWB(p.getUniqueId(), message);
-                        messageSender(sender, config.getString("messages.wb.other-player.enable").replace("%msg%", message).replace("%target%", p.getName()));
-                        messageSender(p, config.getString("messages.wb.self.enable").replace("%msg%", message));
+                        messageSender(sender, plugin.getConfig().getString("messages.wb.other-player.enable").replace("%msg%", message).replace("%target%", p.getName()));
+                        messageSender(p, plugin.getConfig().getString("messages.wb.self.enable").replace("%msg%", message));
                         return true;
                     }
                     else if (args[2].equalsIgnoreCase("welcome")) {
                         if (args[3].equalsIgnoreCase("off")) {
                             setPlayerWelcome(p.getUniqueId(), null);
                             //removePlayerWelcome(p.getUniqueId());
-                            messageSender(sender, config.getString("messages.welcome.other-player.disable").replace("%target%", p.getName()));
-                            messageSender(p, config.getString("messages.welcome.self.disable"));
+                            messageSender(sender, plugin.getConfig().getString("messages.welcome.other-player.disable").replace("%target%", p.getName()));
+                            messageSender(p, plugin.getConfig().getString("messages.welcome.self.disable"));
                             return true;
                         }
 
@@ -276,27 +279,27 @@ public class AutoWelcomeCommand implements CommandExecutor {
 
                         // If message length exceeds max, and sender does not have permission to go over max then cancel
                         String messageNoColour = stripColor(translateAlternateColorCodes('&', message));
-                        int maxMessageLength=config.getInt("max-message-length");
+                        int maxMessageLength=plugin.getConfig().getInt("max-message-length");
                         if(messageNoColour.length()>maxMessageLength && !sender.hasPermission("rbzaw.bypass.maxlength")) {
-                            messageSender(sender, config.getString("messages.exceeded-max-length").replace("%length%", String.valueOf(maxMessageLength)));
+                            messageSender(sender, plugin.getConfig().getString("messages.exceeded-max-length").replace("%length%", String.valueOf(maxMessageLength)));
                             return true;
                         }
 
                         //welcomePlayers.put(p.getUniqueId(), args[3]);
                         setPlayerWelcome(p.getUniqueId(), message);
-                        messageSender(sender, config.getString("messages.welcome.other-player.enable").replace("%msg%", message).replace("%target%", p.getName()));
-                        messageSender(p, config.getString("messages.welcome.self.enable").replace("%msg%", message));
+                        messageSender(sender, plugin.getConfig().getString("messages.welcome.other-player.enable").replace("%msg%", message).replace("%target%", p.getName()));
+                        messageSender(p, plugin.getConfig().getString("messages.welcome.self.enable").replace("%msg%", message));
                         return true;
                     }
                 }
                 // Not 4 arguments
-                messageSender(sender, config.getString("messages.incorrect-usage").replace("%usage%", "/autowb setplayer <player> <wb|welcome> <message|off>"));
+                messageSender(sender, plugin.getConfig().getString("messages.incorrect-usage").replace("%usage%", "/autowb setplayer <player> <wb|welcome> <message|off>"));
                 return true;
             }
         }
 
         // Incorrect args
-        messageSender(sender, config.getString("messages.incorrect-usage").replace("%usage%","/autowb"));
+        messageSender(sender, plugin.getConfig().getString("messages.incorrect-usage").replace("%usage%","/autowb"));
         return true;
     }
 }

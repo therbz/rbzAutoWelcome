@@ -16,7 +16,11 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class PlayerJoinListener implements Listener {
-    private final JavaPlugin plugin = AutoWelcome.getPlugin(AutoWelcome.class);
+    private final AutoWelcome plugin;
+
+    public PlayerJoinListener(AutoWelcome plugin) {
+        this.plugin = plugin;
+    }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
@@ -54,7 +58,7 @@ public class PlayerJoinListener implements Listener {
         else { playerMessages = AutoWelcome.copyOfWelcomePlayers(); }
 
         // Make players in HashMap (as long as not-null) say their wb/welcome
-        AutoWelcomeUtils utils = new AutoWelcomeUtils();
+        AutoWelcomeUtils utils = new AutoWelcomeUtils(plugin);
         utils.welcomeLoop(playerMessages, joiningPlayer);
     }
 }

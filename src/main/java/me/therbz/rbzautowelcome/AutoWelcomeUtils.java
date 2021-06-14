@@ -14,8 +14,12 @@ import java.util.UUID;
 import static org.bukkit.Bukkit.getPlayer;
 
 public class AutoWelcomeUtils {
-    private final JavaPlugin plugin = AutoWelcome.getPlugin(AutoWelcome.class);
+    private final AutoWelcome plugin;
     private final Random r = new Random();
+
+    public AutoWelcomeUtils(AutoWelcome plugin) {
+        this.plugin = plugin;
+    }
 
     public void welcomeLoop(HashMap<UUID, String> playerMessages, Player joiningPlayer) {
         for (Map.Entry<UUID, String> mapElement : playerMessages.entrySet()) {

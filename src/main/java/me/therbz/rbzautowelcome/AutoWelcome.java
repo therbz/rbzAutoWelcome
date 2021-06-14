@@ -25,17 +25,17 @@ public class AutoWelcome extends JavaPlugin implements Listener {
         saveDefaultConfig();
 
         // Register Bukkit listeners
-        Bukkit.getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
-        Bukkit.getServer().getPluginManager().registerEvents(new PlayerLeaveListener(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerJoinListener(this), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerLeaveListener(this), this);
 
         // Register Essentials listeners
         if (Bukkit.getPluginManager().getPlugin("Essentials")!=null) {
             //System.out.println("Essentials FOUND");
-            Bukkit.getServer().getPluginManager().registerEvents(new EssentialsAfkListener(), this);
+            Bukkit.getServer().getPluginManager().registerEvents(new EssentialsAfkListener(this), this);
         }
 
         // Register commands
-        Objects.requireNonNull(getCommand("autowb")).setExecutor(new AutoWelcomeCommand());
+        Objects.requireNonNull(getCommand("autowb")).setExecutor(new AutoWelcomeCommand(this));
 
         // Set up bStats metrics
         MetricsLite metrics = new MetricsLite(this, 9814);
