@@ -8,12 +8,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 
 import static org.bukkit.Bukkit.getPlayer;
 
 public class AutoWelcomeUtils {
     private final JavaPlugin plugin = AutoWelcome.getPlugin(AutoWelcome.class);
+    private final Random r = new Random();
 
     public void welcomeLoop(HashMap<UUID, String> playerMessages, Player joiningPlayer) {
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, () -> {
@@ -37,6 +39,6 @@ public class AutoWelcomeUtils {
                     sendingPlayer.chat(msg);
                 }
             }
-        }, plugin.getConfig().getLong("message-delay"));
+        }, r.nextInt(plugin.getConfig().getInt("message-delay-max") + 1 - plugin.getConfig().getInt("message-delay-min")) + plugin.getConfig().getLong("message-delay-min"));
     }
 }
