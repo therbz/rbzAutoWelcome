@@ -21,8 +21,8 @@ public class PlayerQuit implements Listener {
         UUID playerUUID = e.getPlayer().getUniqueId();
 
         // Clean maps
-        if(main.wbPlayers.containsKey(playerUUID)) main.wbPlayers.remove(playerUUID);
-        if(main.welcomePlayers.containsKey(playerUUID)) main.welcomePlayers.remove(playerUUID);
+        if (main.wbPlayers.containsKey(playerUUID)) main.wbPlayers.remove(playerUUID);
+        if (main.welcomePlayers.containsKey(playerUUID)) main.welcomePlayers.remove(playerUUID);
 
     }
 

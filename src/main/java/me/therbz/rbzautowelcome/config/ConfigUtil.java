@@ -24,8 +24,8 @@ public class ConfigUtil {
 
                 FileConfiguration userFileYAML = YamlConfiguration.loadConfiguration(userFile);
 
-                if(main.wbPlayers.containsKey(playerUUID)) userFileYAML.set("wb", main.wbPlayers.get(playerUUID));
-                if(main.welcomePlayers.containsKey(playerUUID)) userFileYAML.set("welcome", main.welcomePlayers.get(playerUUID));
+                if (main.wbPlayers.containsKey(playerUUID)) userFileYAML.set("wb", main.wbPlayers.get(playerUUID));
+                if (main.welcomePlayers.containsKey(playerUUID)) userFileYAML.set("welcome", main.welcomePlayers.get(playerUUID));
 
                 userFileYAML.save(userFile);
 
@@ -34,8 +34,8 @@ public class ConfigUtil {
             }
 
             // Clean maps if null
-            if(main.wbPlayers.containsKey(playerUUID) && main.wbPlayers.get(playerUUID) == null) main.wbPlayers.remove(playerUUID);
-            if(main.welcomePlayers.containsKey(playerUUID) && main.welcomePlayers.get(playerUUID) == null) main.welcomePlayers.remove(playerUUID);
+            if (main.wbPlayers.containsKey(playerUUID) && main.wbPlayers.get(playerUUID) == null) main.wbPlayers.remove(playerUUID);
+            if (main.welcomePlayers.containsKey(playerUUID) && main.welcomePlayers.get(playerUUID) == null) main.welcomePlayers.remove(playerUUID);
 
         }
 

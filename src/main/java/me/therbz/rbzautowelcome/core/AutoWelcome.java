@@ -48,7 +48,7 @@ public class AutoWelcome extends JavaPlugin implements Listener {
         getLogger().info("Enabled rbzAutoWelcome v" + getDescription().getVersion() + " by therbz");
 
         // Support for /reload, load any missing data on startup instead of relying solely on the join listener
-        for(Player p : Bukkit.getOnlinePlayers()) {
+        for (Player p : Bukkit.getOnlinePlayers()) {
             AWUtils.attemptLoadPlayerdataIntoMap(this, p);
         }
 
