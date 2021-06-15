@@ -28,3 +28,6 @@ permissions:
   rbzaw.reload:
     description: Reload rbzAutoWelcome
     default: op
+  rbzaw.exempt:
+    description: Players with this node will not trigger others auto welcomes
+    default: op

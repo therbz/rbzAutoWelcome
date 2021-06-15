@@ -18,6 +18,8 @@ public class WelcomeLoop {
 
     public static void run(AutoWelcome main, Player joiningPlayer) {
 
+        if(joiningPlayer.hasPermission("rbzaw.exempt")) return;
+
         HashMap<UUID, String> messages = joiningPlayer.hasPlayedBefore() ? main.wbPlayers : main.welcomePlayers;
 
         boolean success = false;
