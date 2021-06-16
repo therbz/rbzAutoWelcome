@@ -1,6 +1,6 @@
 package me.therbz.rbzautowelcome.core;
 
-import me.therbz.rbzautowelcome.commands.CommandRegistry;
+import me.therbz.rbzautowelcome.commands.AutoWelcomeCommand;
 import me.therbz.rbzautowelcome.listeners.ListenerRegistry;
 import me.therbz.rbzautowelcome.metrics.MetricsLite;
 import me.therbz.rbzautowelcome.utils.AWUtils;
@@ -11,6 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.UUID;
 
 public class AutoWelcome extends JavaPlugin implements Listener {
@@ -31,7 +32,7 @@ public class AutoWelcome extends JavaPlugin implements Listener {
         ListenerRegistry.registerListeners(this);
 
         // Commands
-        CommandRegistry.registerCommands(this);
+        Objects.requireNonNull(this.getCommand("autowb")).setExecutor(new AutoWelcomeCommand(this));
 
         // Metrics
         MetricsLite metrics = new MetricsLite(this, 9814);
