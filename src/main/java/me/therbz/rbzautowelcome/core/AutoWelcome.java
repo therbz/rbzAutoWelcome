@@ -45,7 +45,7 @@ public class AutoWelcome extends JavaPlugin implements Listener {
             getLogger().warning("Your config.yml is outdated! Delete it (or rename it) and restart your server to update it!");
         }
 
-        getLogger().info("Enabled rbzAutoWelcome v" + getDescription().getVersion() + " by therbz");
+        getLogger().info("Enabled rbzAutoWelcome v" + getDescription().getVersion());
 
         // Support for /reload, load any missing data on startup instead of relying solely on the join listener
         for (Player p : Bukkit.getOnlinePlayers()) {

@@ -1,6 +1,6 @@
 #########################################
 #                                       #
-#    rbzAutoWelcome v1.7.0 by therbz    #
+#         rbzAutoWelcome v1.6.0         #
 #                                       #
 #########################################
 
@@ -25,7 +25,7 @@ hooks:
     # Automatically welcome/ welcome back players who stop being AFK
     wb-returning-afk: true
 
-# Placeholders
+# Placeholders - changing these will break existing uses in set auto-messages!
 placeholders:
   # Replaced by a players' name when being welcome'd
   joining-player-name: "%p%"
