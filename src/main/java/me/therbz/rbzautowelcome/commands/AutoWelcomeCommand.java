@@ -3,6 +3,7 @@ package me.therbz.rbzautowelcome.commands;
 import me.therbz.rbzautowelcome.config.ConfigUtil;
 import me.therbz.rbzautowelcome.core.AutoWelcome;
 import me.therbz.rbzautowelcome.utils.AWUtils;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -26,8 +27,8 @@ public class AutoWelcomeCommand implements CommandExecutor {
         // 0 args, send help menu
         if (args.length == 0) {
             List<String> help = main.getConfig().getStringList("messages.help");
-            for (String s : help) {
-                AWUtils.format(main, false, sender, s);
+            for (String string : help) {
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', string));
             }
             return true;
         }
@@ -37,14 +38,14 @@ public class AutoWelcomeCommand implements CommandExecutor {
 
             // Check that the sender has permission
             if (!sender.hasPermission("rbzaw.reload")) {
-                AWUtils.format(main, true, sender, main.getConfig().getString("messages.no-permission").replace("%permission%", "rbzaw.reload"));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.no-permission").replace("%permission%", "rbzaw.reload")));
                 return true;
             }
 
             // Reload
             main.reloadConfig();
 
-            AWUtils.format(main, true, sender, main.getConfig().getString("messages.reload"));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.reload")));
             main.getLogger().info("Reloaded rbzAutoWelcome v" + main.getDescription().getVersion());
 
             return true;
@@ -58,7 +59,7 @@ public class AutoWelcomeCommand implements CommandExecutor {
 
                 // Check that the sender is a player
                 if (!(sender instanceof Player)) {
-                    AWUtils.format(main, true, sender, main.getConfig().getString("messages.not-player"));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.not-player")));
                     return true;
                 }
 
@@ -66,7 +67,7 @@ public class AutoWelcomeCommand implements CommandExecutor {
 
                 // Check that sender has permission
                 if (!sender.hasPermission("rbzaw.check")) {
-                    AWUtils.format(main, true, sender, main.getConfig().getString("messages.no-permission").replace("%permission%", "rbzaw.check"));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.no-permission").replace("%permission%", "rbzaw.check")));
                     return true;
                 }
 
@@ -75,12 +76,12 @@ public class AutoWelcomeCommand implements CommandExecutor {
 
                     // Check that they have actually set it first
                     if (!main.wbPlayers.containsKey(p.getUniqueId())) {
-                        AWUtils.format(main, true, sender, main.getConfig().getString("messages.wb.self.check.fail"));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.wb.self.check.fail")));
                         return true;
                     }
 
                     // Tell the player their auto-wb message
-                    AWUtils.format(main, true, sender, main.getConfig().getString("messages.wb.self.check.success").replace("%msg%", main.wbPlayers.get(p.getUniqueId())));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.wb.self.check.success").replace("%msg%", main.wbPlayers.get(p.getUniqueId()))));
 
                     return true;
                 }
@@ -90,18 +91,18 @@ public class AutoWelcomeCommand implements CommandExecutor {
 
                     // Check that they have actually set it first
                     if (!main.welcomePlayers.containsKey(p.getUniqueId())) {
-                        AWUtils.format(main, true, sender, main.getConfig().getString("messages.welcome.self.check.fail"));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.welcome.self.check.fail")));
                         return true;
                     }
 
                     // Tell the player their auto-wb message
-                    AWUtils.format(main, true, sender, main.getConfig().getString("messages.welcome.self.check.success").replace("%msg%", main.welcomePlayers.get(p.getUniqueId())));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.welcome.self.check.success").replace("%msg%", main.welcomePlayers.get(p.getUniqueId()))));
 
                     return true;
                 }
 
                 // They didn't put "wb" or "welcome"
-                AWUtils.format(main, true, sender, main.getConfig().getString("messages.incorrect-usage").replace("%usage%", "/autowb check <wb|welcome> [player]"));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.incorrect-usage").replace("%usage%", "/autowb check <wb|welcome> [player]")));
                 return true;
             }
 
@@ -110,13 +111,13 @@ public class AutoWelcomeCommand implements CommandExecutor {
 
                 // Check that sender has permission
                 if (!sender.hasPermission("rbzaw.check.others")) {
-                    AWUtils.format(main, true, sender, main.getConfig().getString("messages.no-permission").replace("%permission%", "rbzaw.check.others"));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.no-permission").replace("%permission%", "rbzaw.check.others")));
                     return true;
                 }
 
                 // Check that player exists
                 if (getPlayer(args[2]) == null) {
-                    AWUtils.format(main, true, sender, main.getConfig().getString("messages.unknown-player").replace("%target%", args[2]));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.unknown-player").replace("%target%", args[2])));
                     return true;
                 }
 
@@ -127,24 +128,24 @@ public class AutoWelcomeCommand implements CommandExecutor {
                     // Check that they have actually set it first
                     //if (!wbPlayers.containsKey(p.getUniqueId())) {
                     if (!main.wbPlayers.containsKey(p.getUniqueId())) {
-                        AWUtils.format(main, true, sender, main.getConfig().getString("messages.wb.other-player.check.fail").replace("%player%", p.getName()));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.wb.other-player.check.fail").replace("%player%", p.getName())));
                         return true;
                     }
 
                     // Tell the player their auto-wb message
-                    AWUtils.format(main, true, sender, main.getConfig().getString("messages.wb.other-player.check.success").replace("%msg%", main.wbPlayers.get(p.getUniqueId())).replace("%player%", p.getName()));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.wb.other-player.check.success").replace("%msg%", main.wbPlayers.get(p.getUniqueId())).replace("%player%", p.getName())));
                     return true;
 
                 } else if (args[1].equalsIgnoreCase("welcome")) {
 
                     // Check that they have actually set it first
                     if (!main.welcomePlayers.containsKey(p.getUniqueId())) {
-                        AWUtils.format(main, true, sender, main.getConfig().getString("messages.welcome.other-player.check.fail").replace("%player%", p.getName()));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.welcome.other-player.check.fail").replace("%player%", p.getName())));
                         return true;
                     }
 
                     // Tell the player their auto-wb message
-                    AWUtils.format(main, true, sender, main.getConfig().getString("messages.welcome.other-player.check.success").replace("%msg%", main.welcomePlayers.get(p.getUniqueId())).replace("%player%", p.getName()));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.welcome.other-player.check.success").replace("%msg%", main.welcomePlayers.get(p.getUniqueId())).replace("%player%", p.getName())));
 
                     return true;
                 }
@@ -152,7 +153,7 @@ public class AutoWelcomeCommand implements CommandExecutor {
             }
 
             // Sender didn't put 2 or 3 arguments
-            AWUtils.format(main, true, sender, main.getConfig().getString("messages.incorrect-usage").replace("%usage%", "/autowb check <wb|welcome> [player]"));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.incorrect-usage").replace("%usage%", "/autowb check <wb|welcome> [player]")));
 
             return true;
         }
@@ -165,7 +166,7 @@ public class AutoWelcomeCommand implements CommandExecutor {
 
                 // Check that the sender is a player
                 if (!(sender instanceof Player)) {
-                    AWUtils.format(main, true, sender, main.getConfig().getString("messages.not-player"));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.not-player")));
                     return true;
                 }
 
@@ -173,7 +174,7 @@ public class AutoWelcomeCommand implements CommandExecutor {
 
                 // Check that sender has permission
                 if (!sender.hasPermission("rbzaw.set")) {
-                    AWUtils.format(main, true, sender, main.getConfig().getString("messages.no-permission").replace("%permission%", "rbzaw.set"));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.no-permission").replace("%permission%", "rbzaw.set")));
                     return true;
                 }
 
@@ -183,7 +184,7 @@ public class AutoWelcomeCommand implements CommandExecutor {
 
                         main.wbPlayers.put(p.getUniqueId(), null);
                         ConfigUtil.attemptSavePlayerdata(main, p);
-                        AWUtils.format(main, true, sender, main.getConfig().getString("messages.wb.self.disable"));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.wb.self.disable")));
 
                         return true;
                     }
@@ -197,13 +198,13 @@ public class AutoWelcomeCommand implements CommandExecutor {
                     // If message length exceeds max, and sender does not have permission to go over max then cancel
                     int maxMessageLength = main.getConfig().getInt("max-message-length");
                     if (stripColor(message).length() > maxMessageLength && !sender.hasPermission("rbzaw.bypass.maxlength")) {
-                        AWUtils.format(main, true, sender, main.getConfig().getString("messages.exceeded-max-length").replace("%length%", String.valueOf(maxMessageLength)));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.exceeded-max-length").replace("%length%", String.valueOf(maxMessageLength))));
                         return true;
                     }
 
                     main.wbPlayers.put(p.getUniqueId(), message);
                     ConfigUtil.attemptSavePlayerdata(main, p);
-                    AWUtils.format(main, true, sender, main.getConfig().getString("messages.wb.self.enable").replace("%msg%", message));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.wb.self.enable").replace("%msg%", message)));
 
                     return true;
 
@@ -213,7 +214,7 @@ public class AutoWelcomeCommand implements CommandExecutor {
 
                         main.welcomePlayers.put(p.getUniqueId(), null);
                         ConfigUtil.attemptSavePlayerdata(main, p);
-                        AWUtils.format(main, true, sender, main.getConfig().getString("messages.welcome.self.disable"));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.welcome.self.disable")));
 
                         return true;
                     }
@@ -227,13 +228,13 @@ public class AutoWelcomeCommand implements CommandExecutor {
                     // If message length exceeds max, and sender does not have permission to go over max then cancel
                     int maxMessageLength = main.getConfig().getInt("max-message-length");
                     if (stripColor(message).length() > maxMessageLength && !sender.hasPermission("rbzaw.bypass.maxlength")) {
-                        AWUtils.format(main, true, sender, main.getConfig().getString("messages.exceeded-max-length").replace("%length%", String.valueOf(maxMessageLength)));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.exceeded-max-length").replace("%length%", String.valueOf(maxMessageLength))));
                         return true;
                     }
 
                     main.welcomePlayers.put(p.getUniqueId(), message);
                     ConfigUtil.attemptSavePlayerdata(main, p);
-                    AWUtils.format(main, true, sender, main.getConfig().getString("messages.welcome.self.enable").replace("%msg%", message));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.welcome.self.enable").replace("%msg%", message)));
 
                     return true;
 
@@ -241,7 +242,7 @@ public class AutoWelcomeCommand implements CommandExecutor {
             }
 
             // Sender didn't put at least 3 arguments
-            AWUtils.format(main, true, sender, main.getConfig().getString("messages.incorrect-usage").replace("%usage%", "/autowb set <wb|welcome> <message|off>"));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.incorrect-usage").replace("%usage%", "/autowb set <wb|welcome> <message|off>")));
             return true;
         }
 
@@ -252,13 +253,13 @@ public class AutoWelcomeCommand implements CommandExecutor {
 
                 // Check that sender has permission
                 if (!sender.hasPermission("rbzaw.set.others")) {
-                    AWUtils.format(main, true, sender, main.getConfig().getString("messages.no-permission").replace("%permission%", "rbzaw.set.others"));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.no-permission").replace("%permission%", "rbzaw.set.others")));
                     return true;
                 }
 
                 // Check that target exists
                 if (getPlayer(args[1]) == null) {
-                    AWUtils.format(main, true, sender, main.getConfig().getString("messages.unknown-player").replace("%target%", args[1]));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.unknown-player").replace("%target%", args[1])));
                     return true;
                 }
 
@@ -270,8 +271,8 @@ public class AutoWelcomeCommand implements CommandExecutor {
 
                         main.wbPlayers.put(p.getUniqueId(), null);
                         ConfigUtil.attemptSavePlayerdata(main, p);
-                        AWUtils.format(main, true, sender, main.getConfig().getString("messages.wb.other-player.disable").replace("%target%", p.getName()));
-                        AWUtils.format(main, true, p, main.getConfig().getString("messages.wb.self.disable"));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.wb.other-player.disable").replace("%target%", p.getName())));
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.wb.self.disable")));
 
                         return true;
                     }
@@ -285,14 +286,14 @@ public class AutoWelcomeCommand implements CommandExecutor {
                     // If message length exceeds max, and sender does not have permission to go over max then cancel
                     int maxMessageLength = main.getConfig().getInt("max-message-length");
                     if (stripColor(message).length() > maxMessageLength && !sender.hasPermission("rbzaw.bypass.maxlength")) {
-                        AWUtils.format(main, true, sender, main.getConfig().getString("messages.exceeded-max-length").replace("%length%", String.valueOf(maxMessageLength)));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.exceeded-max-length").replace("%length%", String.valueOf(maxMessageLength))));
                         return true;
                     }
 
                     main.wbPlayers.put(p.getUniqueId(), message);
                     ConfigUtil.attemptSavePlayerdata(main, p);
-                    AWUtils.format(main, true, sender, main.getConfig().getString("messages.wb.other-player.enable").replace("%msg%", message).replace("%target%", p.getName()));
-                    AWUtils.format(main, true, p, main.getConfig().getString("messages.wb.self.enable").replace("%msg%", message));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.wb.other-player.enable").replace("%msg%", message).replace("%target%", p.getName())));
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.wb.self.enable").replace("%msg%", message)));
                     return true;
 
                 } else if (args[2].equalsIgnoreCase("welcome")) {
@@ -301,8 +302,8 @@ public class AutoWelcomeCommand implements CommandExecutor {
 
                         main.welcomePlayers.put(p.getUniqueId(), null);
                         ConfigUtil.attemptSavePlayerdata(main, p);
-                        AWUtils.format(main, true, sender, main.getConfig().getString("messages.welcome.other-player.disable").replace("%target%", p.getName()));
-                        AWUtils.format(main, true, p, main.getConfig().getString("messages.welcome.self.disable"));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.welcome.other-player.disable").replace("%target%", p.getName())));
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.welcome.self.disable")));
 
                         return true;
                     }
@@ -316,25 +317,25 @@ public class AutoWelcomeCommand implements CommandExecutor {
                     // If message length exceeds max, and sender does not have permission to go over max then cancel
                     int maxMessageLength = main.getConfig().getInt("max-message-length");
                     if (stripColor(message).length() > maxMessageLength && !sender.hasPermission("rbzaw.bypass.maxlength")) {
-                        AWUtils.format(main, true, sender, main.getConfig().getString("messages.exceeded-max-length").replace("%length%", String.valueOf(maxMessageLength)));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.exceeded-max-length").replace("%length%", String.valueOf(maxMessageLength))));
                         return true;
                     }
 
                     main.welcomePlayers.put(p.getUniqueId(), null);
                     ConfigUtil.attemptSavePlayerdata(main, p);
-                    AWUtils.format(main, true, sender, main.getConfig().getString("messages.welcome.other-player.enable").replace("%msg%", message).replace("%target%", p.getName()));
-                    AWUtils.format(main, true, p, main.getConfig().getString("messages.welcome.self.enable").replace("%msg%", message));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.welcome.other-player.enable").replace("%msg%", message).replace("%target%", p.getName())));
+                    p.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.welcome.self.enable").replace("%msg%", message)));
                     return true;
                 }
             }
 
             // Not 4 arguments
-            AWUtils.format(main, true, sender, main.getConfig().getString("messages.incorrect-usage").replace("%usage%", "/autowb setplayer <player> <wb|welcome> <message|off>"));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.incorrect-usage").replace("%usage%", "/autowb setplayer <player> <wb|welcome> <message|off>")));
             return true;
         }
 
         // Incorrect args
-        AWUtils.format(main, true, sender, main.getConfig().getString("messages.incorrect-usage").replace("%usage%", "/autowb"));
+        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("messages.incorrect-usage").replace("%usage%", "/autowb")));
         return true;
     }
 

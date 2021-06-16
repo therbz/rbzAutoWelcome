@@ -15,11 +15,6 @@ import static org.bukkit.ChatColor.translateAlternateColorCodes;
 
 public class AWUtils {
 
-    // Send a colorized message to a CommandSender
-    public static void format(AutoWelcome main, boolean appendPrefix, CommandSender sender, String message) {
-        sender.sendMessage(translateAlternateColorCodes('&', appendPrefix ? main.getConfig().getString("messages.prefix") + " " + message : message));
-    }
-
     // Returns whether a player is AFK according to Essentials, otherwise returns false if ess hook is disabled
     public static boolean isEssAfk(AutoWelcome main, Player p) {
 

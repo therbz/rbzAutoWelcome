@@ -22,7 +22,7 @@ public class AutoWelcome extends JavaPlugin implements Listener {
     public HashMap<UUID, String> welcomePlayers = new HashMap<>();
     public ArrayList<UUID> recentlyWbdPlayers = new ArrayList<>();
 
-    public final int CURRENT_CONFIG_VERSION = 8; // Update this as necessary
+    public final int CURRENT_CONFIG_VERSION = 9; // Update this as necessary
 
     public void onEnable() {
 
