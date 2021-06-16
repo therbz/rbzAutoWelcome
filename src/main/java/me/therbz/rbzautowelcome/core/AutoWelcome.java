@@ -15,8 +15,6 @@ import java.util.UUID;
 
 public class AutoWelcome extends JavaPlugin implements Listener {
 
-    AutoWelcome plugin;
-
     public HashMap<UUID, String> wbPlayers = new HashMap<>();
     public HashMap<UUID, String> welcomePlayers = new HashMap<>();
     public ArrayList<UUID> recentlyWbdPlayers = new ArrayList<>();
@@ -24,8 +22,6 @@ public class AutoWelcome extends JavaPlugin implements Listener {
     public final int CURRENT_CONFIG_VERSION = 7; // Update this as necessary
 
     public void onEnable() {
-
-        plugin = this;
 
         // Config work
         getConfig().options().copyDefaults(true);
