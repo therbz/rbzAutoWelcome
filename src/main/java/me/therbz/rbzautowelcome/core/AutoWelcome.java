@@ -1,7 +1,9 @@
 package me.therbz.rbzautowelcome.core;
 
 import me.therbz.rbzautowelcome.commands.AutoWelcomeCommand;
-import me.therbz.rbzautowelcome.listeners.ListenerRegistry;
+import me.therbz.rbzautowelcome.listeners.AfkStatusChange;
+import me.therbz.rbzautowelcome.listeners.PlayerJoin;
+import me.therbz.rbzautowelcome.listeners.PlayerQuit;
 import me.therbz.rbzautowelcome.metrics.MetricsLite;
 import me.therbz.rbzautowelcome.utils.AWUtils;
 import org.bukkit.Bukkit;
@@ -29,7 +31,9 @@ public class AutoWelcome extends JavaPlugin implements Listener {
         saveDefaultConfig();
 
         // Listeners
-        ListenerRegistry.registerListeners(this);
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerJoin(this), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerQuit(this), this);
+        if (Bukkit.getPluginManager().getPlugin("Essentials") != null) Bukkit.getServer().getPluginManager().registerEvents(new AfkStatusChange(this), this);
 
         // Commands
         Objects.requireNonNull(this.getCommand("autowb")).setExecutor(new AutoWelcomeCommand(this));
