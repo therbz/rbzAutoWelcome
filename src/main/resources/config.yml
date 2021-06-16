@@ -1,6 +1,6 @@
 #########################################
 #                                       #
-#    rbzAutoWelcome v1.5.0 by therbz    #
+#         rbzAutoWelcome v1.6.0         #
 #                                       #
 #########################################
 
@@ -14,6 +14,12 @@ message-delay-max: 110
 # Default: 64
 max-message-length: 64
 
+# Prevents AutoWelcome from sending welcome back messages for the same player repetitively in a short time span (ex. if someone is relogging a bunch of times)
+prevent-same-player-wb-spam: true
+# The minimum delay to wait between sending welcome back messages for the same player, in ticks
+# Default: 300 (15s)
+min-message-delay: 300
+
 # Plugin hooks
 hooks:
   essentials:
@@ -21,17 +27,17 @@ hooks:
     enabled: true
     # Automatically welcome/ welcome back players who stop being AFK
     wb-returning-afk: true
-    # Prevent players who are AFK from automatically welcoming/ wb'ing-
-    # thus stopping the messaging player from exiting AFK state
-    prevent-afk-messaging: true
 
-# Placeholders
+# Placeholders - changing these will break existing uses in set auto-messages!
 placeholders:
   # Replaced by a players' name when being welcome'd
-  joining-player: "@p"
+  joining-player-name: "%p%"
+  # Replaced by a players' display name (stripped of colorcodes) when being welcome'd. Useful if you want to use peoples nicknames instead of usernames
+  joining-player-displayname: "%p-display%"
 
 # Messages
 messages:
+
   help:
     - "&8&m--------------------------------"
     - "&r         &6&lrbzAutoWelcome &8- &7Help"
@@ -93,4 +99,4 @@ messages:
         fail: "&c&lAUTOWB &8\u00BB &c%player% &4has not set an auto-welcome message!"
 
 # DO NOT TOUCH
-config-version: 6
+config-version: 9

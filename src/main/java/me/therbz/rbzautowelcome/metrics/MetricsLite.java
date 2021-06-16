@@ -1,4 +1,4 @@
-package me.therbz.rbzautowelcome;
+package me.therbz.rbzautowelcome.metrics;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -17,8 +17,6 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -82,9 +80,8 @@ public class MetricsLite {
     /**
      * Class constructor.
      *
-     * @param plugin The plugin which stats should be submitted.
-     * @param pluginId The id of the plugin.
-     *                 It can be found at <a href="https://bstats.org/what-is-my-plugin-id">What is my plugin id?</a>
+     * @param plugin   The plugin which stats should be submitted.
+     * @param pluginId The id of the plugin. It can be found at <a href="https://bstats.org/what-is-my-plugin-id">What is my plugin id?</a>
      */
     public MetricsLite(Plugin plugin, int pluginId) {
         if (plugin == null) {
@@ -121,7 +118,8 @@ public class MetricsLite {
             ).copyDefaults(true);
             try {
                 config.save(configFile);
-            } catch (IOException ignored) { }
+            } catch (IOException ignored) {
+            }
         }
 
         // Load the data
@@ -138,7 +136,8 @@ public class MetricsLite {
                     service.getField("B_STATS_VERSION"); // Our identifier :)
                     found = true; // We aren't the first
                     break;
-                } catch (NoSuchFieldException ignored) { }
+                } catch (NoSuchFieldException ignored) {
+                }
             }
             // Register our service
             Bukkit.getServicesManager().register(MetricsLite.class, this, plugin, ServicePriority.Normal);
@@ -183,8 +182,7 @@ public class MetricsLite {
     }
 
     /**
-     * Gets the plugin specific data.
-     * This method is called using Reflection.
+     * Gets the plugin specific data. This method is called using Reflection.
      *
      * @return The plugin specific data.
      */
@@ -286,7 +284,8 @@ public class MetricsLite {
                     } catch (NullPointerException | NoSuchMethodException | IllegalAccessException | InvocationTargetException ignored) {
                     }
                 }
-            } catch (NoSuchFieldException ignored) { }
+            } catch (NoSuchFieldException ignored) {
+            }
         }
 
         data.add("plugins", pluginData);
@@ -309,7 +308,7 @@ public class MetricsLite {
      * Sends the data to the bStats server.
      *
      * @param plugin Any plugin. It's just used to get a logger instance.
-     * @param data The data to send.
+     * @param data   The data to send.
      * @throws Exception If the request failed.
      */
     private static void sendData(Plugin plugin, JsonObject data) throws Exception {
@@ -367,7 +366,7 @@ public class MetricsLite {
             return null;
         }
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        try(GZIPOutputStream gzip = new GZIPOutputStream(outputStream)) {
+        try (GZIPOutputStream gzip = new GZIPOutputStream(outputStream)) {
             gzip.write(str.getBytes(StandardCharsets.UTF_8));
         }
         return outputStream.toByteArray();

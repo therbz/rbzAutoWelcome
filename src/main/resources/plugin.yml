@@ -1,14 +1,14 @@
 name: rbzAutoWelcome
 version: 1.6.0
 author: therbz
-main: me.therbz.rbzautowelcome.AutoWelcome
+main: me.therbz.rbzautowelcome.core.AutoWelcome
 api-version: 1.13
-softdepend: [Essentials]
+softdepend: [ Essentials ]
 commands:
   autowb:
     description: Main rbzAutoWelcome command
     usage: /autowb
-    aliases: [awb, rbzaw]
+    aliases: [ awb, rbzaw ]
 permissions:
   rbzaw.set:
     description: Set your own auto wb/welcome messages
@@ -27,4 +27,7 @@ permissions:
     default: op
   rbzaw.reload:
     description: Reload rbzAutoWelcome
+    default: op
+  rbzaw.exempt:
+    description: Players with this node will not trigger others auto welcomes
     default: op

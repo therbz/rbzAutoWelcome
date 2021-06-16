@@ -3,6 +3,7 @@
 Automatically welcome/ welcome back joining players!
 
 # Commands
+
 * /autowb - Display help menu
 * /autowb set <wb|welcome> <message> - Set your wb/ welcome message
 * /autowb setplayer <wb|welcome> <player> <message> - Set another players' wb/ welcome message
@@ -10,13 +11,11 @@ Automatically welcome/ welcome back joining players!
 * /autowb reload - Reload the plugin's configuration
 
 # Installation
+
 1. Stop your server
 2. Download rbzAutoWelcome.jar to /plugins/
 3. Start your server
 
 # bStats Metrics
-[This plugin uses bStats metrics.](https://bstats.org/plugin/bukkit/rbzAutoWelcome/9814)
 
-# To-do
-* Add multi-word player messages
-* Add EssentialsX AFK hook
+[This plugin uses bStats metrics.](https://bstats.org/plugin/bukkit/rbzAutoWelcome/9814)
