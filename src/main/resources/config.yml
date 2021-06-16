@@ -16,6 +16,9 @@ max-message-length: 64
 
 # Prevents AutoWelcome from sending welcome back messages for the same player repetitively in a short time span (ex. if someone is relogging a bunch of times)
 prevent-same-player-wb-spam: true
+# The minimum delay to wait between sending welcome back messages for the same player, in ticks
+# Default: 300 (15s)
+min-message-delay: 300
 
 # Plugin hooks
 hooks:
@@ -99,4 +102,4 @@ messages:
         fail: "&c%player% &4has not set an auto-welcome message!"
 
 # DO NOT TOUCH
-config-version: 7
+config-version: 8

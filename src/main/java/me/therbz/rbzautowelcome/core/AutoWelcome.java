@@ -22,7 +22,7 @@ public class AutoWelcome extends JavaPlugin implements Listener {
     public HashMap<UUID, String> welcomePlayers = new HashMap<>();
     public ArrayList<UUID> recentlyWbdPlayers = new ArrayList<>();
 
-    public final int CURRENT_CONFIG_VERSION = 7; // Update this as necessary
+    public final int CURRENT_CONFIG_VERSION = 8; // Update this as necessary
 
     public void onEnable() {
 
@@ -45,8 +45,6 @@ public class AutoWelcome extends JavaPlugin implements Listener {
         if (getConfig().getInt("config-version") < CURRENT_CONFIG_VERSION) {
             getLogger().warning("Your config.yml is outdated! Delete it (or rename it) and restart your server to update it!");
         }
-
-        getLogger().info("Enabled rbzAutoWelcome v" + getDescription().getVersion());
 
         // Support for /reload, load any missing data on startup instead of relying solely on the join listener
         for (Player p : Bukkit.getOnlinePlayers()) {

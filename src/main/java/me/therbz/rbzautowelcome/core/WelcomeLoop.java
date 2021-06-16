@@ -66,7 +66,7 @@ public class WelcomeLoop {
 
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(main, () -> {
             if (main.recentlyWbdPlayers.contains(welcomed.getUniqueId())) main.recentlyWbdPlayers.remove(welcomed.getUniqueId());
-        }, 20 * 15L);
+        }, main.getConfig().getInt("min-message-delay"));
 
     }
 
