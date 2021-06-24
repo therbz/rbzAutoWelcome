@@ -6,7 +6,7 @@
 
     <groupId>com.github.therbz</groupId>
     <artifactId>rbzAutoWelcome</artifactId>
-    <version>1.2.1</version>
+    <version>1.7.0</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -38,6 +38,11 @@
             <artifactId>EssentialsX</artifactId>
             <version>2.18.2</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.bukkit</groupId>
+            <artifactId>bukkit</artifactId>
+            <version>1.12.2-R0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
