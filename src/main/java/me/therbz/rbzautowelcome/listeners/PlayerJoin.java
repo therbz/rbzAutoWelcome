@@ -28,7 +28,7 @@ public class PlayerJoin implements Listener {
         AWUtils.attemptLoadPlayerdataIntoMap(main, p);
 
         // Make players in HashMap say their wb/welcome
-        WelcomeLoop.run(main, p);
+        WelcomeLoop.run(main, p, false);
     }
 
 }
