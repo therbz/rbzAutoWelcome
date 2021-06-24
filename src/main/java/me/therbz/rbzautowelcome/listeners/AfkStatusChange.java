@@ -20,7 +20,7 @@ public class AfkStatusChange implements Listener {
         // Therefore, we're checking if the player disabled AFK
 
         // If ess hook & wb-returning-afk is enabled, and the player is going un-afk for any reason other than quitting
-        if (main.getConfig().getBoolean("hooks.essentials.enabled") && main.getConfig().getBoolean("hooks.essentials.wb-returning-afk") && !e.getValue() && e.getCause() != AfkStatusChangeEvent.Cause.QUIT) WelcomeLoop.run(main, e.getAffected().getBase());
+        if (main.getConfig().getBoolean("hooks.essentials.enabled") && main.getConfig().getBoolean("hooks.essentials.wb-returning-afk") && !e.getValue() && e.getCause() != AfkStatusChangeEvent.Cause.QUIT) WelcomeLoop.run(main, e.getAffected().getBase(), true);
 
     }
 

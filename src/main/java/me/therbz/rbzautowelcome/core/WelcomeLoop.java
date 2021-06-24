@@ -16,11 +16,12 @@ public class WelcomeLoop {
 
     private static final Random r = new Random();
 
-    public static void run(AutoWelcome main, Player joiningPlayer) {
+    public static void run(AutoWelcome main, Player joiningPlayer, boolean essentialsUnafk) {
 
         if(joiningPlayer.hasPermission("rbzaw.exempt")) return;
 
         HashMap<UUID, String> messages = joiningPlayer.hasPlayedBefore() ? main.wbPlayers : main.welcomePlayers;
+        if(essentialsUnafk) messages = main.wbPlayers;
 
         boolean success = false;
 
