@@ -28,10 +28,11 @@ public class WelcomeLoop {
         for (Map.Entry<UUID, String> map : messages.entrySet()) {
 
             UUID sendingPlayerUuid = map.getKey();
+            Player sendingPlayer = getPlayer(sendingPlayerUuid);
+
+            if(AWUtils.isEssAfk(main, sendingPlayer)) continue;
 
             String msg = map.getValue().replace(main.getConfig().getString("placeholders.joining-player-name"), joiningPlayer.getName()).replace(main.getConfig().getString("placeholders.joining-player-displayname"), ChatColor.stripColor(joiningPlayer.getDisplayName()));
-
-            Player sendingPlayer = getPlayer(sendingPlayerUuid);
 
             if (joiningPlayer != sendingPlayer && sendingPlayer.hasPermission("rbzaw.set") && !AWUtils.isEssAfk(main, sendingPlayer)) {
 
